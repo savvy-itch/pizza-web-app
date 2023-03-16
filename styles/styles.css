@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  --text-color: white;
+  --highlighted-color: #FFAA2C;
+  --background-color: #24262F;
+
+  font-family: 'Signika', sans-serif;
+}
+
+/* ------------ Nav Bar --------------*/
+nav {
+  background-color: var(--background-color);
+}
+nav a,
+.nav-logo,
+.nav-toggle {
+  color: var(--text-color);
+  text-decoration: none;
+}
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.logo {
+  padding-right: 10px;
+}
+.nav-toggle {
+  font-size: 1.5rem;
+  background: transparent;
+  border-color: transparent;
+  transition: .2s;
+  cursor: pointer;
+}
+.nav-toggle:hover {
+  transform: rotate(90deg);
+}
+.logo {
+  height: 40px;
+}
+.links a {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  display: block;
+  padding: 0.5rem 1rem;
+  transition: .2s;
+  border: none;
+  position: relative;
+}
+.links a:hover {
+  color: var(--highlighted-color);
+  padding-left: 1.5rem;
+}
+.links {
+  height: 0;
+  overflow: hidden;
+  transition: .2s;
+  list-style: none;
+}
+.show-links {
+  height: 10rem;
+}
+.cart-link,
+.cart-link-sm {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+.cart-link:hover {
+  color: var(--highlighted-color);
+}
+.cart-link-sm {
+  justify-self: end;
+}
+@media screen and (min-width: 800px) {
+  .nav-center {
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  .nav-header {
+    padding: 0;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  .links {
+    height: auto;
+    display: flex;
+  }
+  .links a {
+    padding: 0;
+    margin: 0 2rem;
+  }
+  .links a:hover {
+    padding: 0;
+    background: transparent;
+  }
+  .cart-link-sm {
+    display: none;
+  }
+
+  /* links underline on hover  */
+  .links a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: var(--highlighted-color);
+    transform: scaleX(0);
+    transition: transform 300ms ease-in-out;
+  }
+  .links a:hover::before,
+  .links a:focus::before {
+    transform: scaleX(1)
+  }
+}
+@media screen and (max-width: 800px) {
+  .nav-header {
+    display: grid;
+    grid-template-columns: 4fr 1fr 1fr;
+  }
+  .cart-link {
+    display: none;
+  }
+}

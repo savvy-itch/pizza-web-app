@@ -1,0 +1,66 @@
+body {
+  max-height: 100vh;
+  height: 100vh;
+}
+.container {
+  background-image: url('../images/pizza-background.png');
+
+}
+.pizza-constructor-container {
+  display: flex;
+  justify-content: space-around;
+}
+.pizza-constructor-image {
+  /* max-width: 30%;
+  width: 30%; */
+  width: 30vw;
+  height: 30vw;
+  position: relative;
+}
+.pizza-constructor-image .pizza-base-image {
+  width: 100%;
+  height: auto;
+  position: absolute;
+}
+.pizza-topping-image {
+  /* max-width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0; */
+  z-index: 1;
+  position: absolute;
+  left: 7.5%;
+  top: 2%;
+  width: 85%;
+  height: auto;
+}
+.toppings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.topping-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 60%;
+}
+.topping-btn {
+  font-family: 'Signika', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #F5F3EF;
+  color: hsl(229, 13%, 46%);
+  padding: 15px 5px;
+  margin: .5rem;
+  min-width: 100px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.topping-btn-container .active {
+  color: #F6752C;
+  border: 2px solid #FFAA2C;
+  box-shadow: 0px 3px 10px rgba(26, 26, 33, 0.1);
+}

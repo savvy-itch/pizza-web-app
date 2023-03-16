@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pizza Website Project</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <link rel="stylesheet" href="./styles/custom.css">
+  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-center">
+        <div class="nav-header">
+          <div class="nav-logo">
+            <img class="logo" src="./images/logo.png" alt="pizza-logo">
+            Pizza O'Clock
+          </div>
+          <a class="cart-link-sm" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+          <button class="nav-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <ul class="links">
+          <li>
+            <a href="./index.html">home</a>
+          </li>
+          <li>
+            <a href="./menu.html">menu</a>
+          </li>
+          <li>
+            <a href="#">contact</a>
+          </li>
+        </ul>
+        <a class="cart-link" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1>Create your own pizza</h1>
+      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate repellat quas totam delectus corporis magnam ab distinctio. Commodi, ut obcaecati.</p>
+      <div class="size-btn-container">
+        <button>S</button>
+        <button>M</button>
+        <button>L</button>
+      </div>
+      <section class="pizza-constructor-container">
+        <div class="pizza-constructor-image">
+          <img class="pizza-base-image" src="./images/ingredients/pizza-base.png" alt="pizza base">
+          <img class="pizza-topping-image" src="./images/ingredients/cheese.png" alt="cheese">
+          <img class="pizza-topping-image" src="./images/ingredients/peppers.png" alt="cheese">
+        </div>
+        <div class="toppings-container">
+          <h3>Choose toppings:</h3>
+          <div class="topping-btn-container">
+            <button class="topping-btn">Bacon</button>
+            <button class="topping-btn active">Cheese</button>
+            <button class="topping-btn">Meatballs</button>
+            <button class="topping-btn">Olives</button>
+            <button class="topping-btn">Parsley</button>
+            <button class="topping-btn">Pepperoni</button>
+            <button class="topping-btn">Peppers</button>        
+          </div>
+        </div>
+      </section>
+      <div class="cart-btn-container">
+        <a href="./cart.html">
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="./nav.js"></script>
+</body>
+</html>
