@@ -1,0 +1,141 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 5px;
+  margin: 1.5rem 0;
+  color: var(--background-color);
+}
+.cart {
+  background-color: white;
+  max-width: 500px;
+  width: 80vw;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+}
+.order {
+  display: grid;
+  grid-template-columns: 1.1fr 4fr 1fr;
+  align-items: center;
+  gap: .5rem;
+  margin: .7rem 0;
+}
+.order-image img {
+  max-width: 100%;
+  height: auto;
+}
+.order-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1rem;
+}
+.order-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--background-color);
+}
+.order-cost {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--background-color);
+}
+.remove-btn {
+  cursor: pointer;
+  background-color: transparent;
+  width: fit-content;
+  border: none;
+  margin: .5rem 0;
+  color: var(--background-color);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  font-weight: 400;
+  transition: .2s;
+}
+.remove-btn:hover {
+  color: lightcoral;
+}
+.amount-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-self: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--background-color);
+  width: 90px;
+}
+.amount-div button {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--background-color);
+  background-color: transparent;
+  border: 1px solid #969AB0;
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: .2s;
+}
+.amount-div button:hover {
+  border: 1px solid var(--highlighted-color);
+}
+.line {
+  width: 80%;
+  height: 1px;
+  background-color: #969AB0;
+  margin: 0 auto;
+}
+.total-cost {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+  width: 80vw;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.total-cost p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--background-color);
+  text-transform: uppercase;
+}
+.confim-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.confim-div input {
+  padding: .5rem;
+  font-size: 1.2rem;
+  color: var(--background-color);
+  border-radius: 10px;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+.confim-div button {
+  font-size: 1.2rem;
+  padding: .7rem;
+  font-weight: 600;
+  background-color: var(--highlighted-color);
+  color: white;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transform: .2s;
+}
+.confim-div button:hover,
+.confim-div button:focus {
+  background-color: var(--background-color);
+  color: var(--highlighted-color);
+}

@@ -34,7 +34,7 @@
   - add to cart button
 
 ## Contact
-  - socail media links
+  - social media links
 
 ## Cart
   - ordered pizza

@@ -7,7 +7,7 @@
   <title>Pizza Website Project</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="stylesheet" href="./styles/styles.css">
-  <link rel="stylesheet" href="./styles/menu.css">
+  <link rel="stylesheet" href="./styles/cart.css">
   <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
 <body>
@@ -29,10 +29,10 @@
             <a href="./index.html">home</a>
           </li>
           <li>
-            <a href="#">menu</a>
+            <a href="./menu.html">menu</a>
           </li>
           <li>
-            <a href="#">contact</a>
+            <a href="./contact.html">contact</a>
           </li>
         </ul>
         <a class="cart-link" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
@@ -41,7 +41,51 @@
   </header>
 
   <main>
-
+    <section class="container">
+      <h1>Your Cart</h1>
+      <div class="cart">
+        <div class="order">
+          <div class="order-image">
+            <img src="./images/menu-pizza2.png" alt="pizza">
+          </div>
+          <div class="order-info">
+            <p class="order-title">Pizza Title</p>
+            <p class="order-cost">£14.25</p>
+            <button class="remove-btn">Remove</button>
+          </div>
+          <div class="amount-div">
+            <button>-</button>
+            <p>3</p>
+            <button>+</button>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="order">
+          <div class="order-image">
+            <img src="./images/menu-pizza2.png" alt="pizza">
+          </div>
+          <div class="order-info">
+            <p class="order-title">Pizza Title</p>
+            <p class="order-cost">£14.25</p>
+            <button class="remove-btn">Remove</button>
+          </div>
+          <div class="amount-div">
+            <button>-</button>
+            <p>3</p>
+            <button>+</button>
+          </div>
+        </div>
+      </div>
+      <div class="total-cost">
+        <p>Total: </p>
+        <p>£28.50</p>
+      </div>
+      <div class="confim-div">
+        <h3>Enter your email to confirm your order</h3>
+        <input type="email" placeholder="example@mail.com">
+        <button type="submit">Confirm Order</button>
+      </div>
+    </section>
   </main>
 
   <script src="./nav.js"></script>

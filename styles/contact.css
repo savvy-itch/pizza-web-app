@@ -1,0 +1,40 @@
+body {
+  max-height: 100vh;
+  background-image: url('../images/pizza-background2.png');
+  overflow: hidden;
+}
+.container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact-div {
+  background-color: var(--highlighted-color);
+  color: white;
+  padding: 2rem;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+.contact-div h2 {
+  font-size: 3rem;
+}
+.social-links-div {
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.social-links-div a {
+  text-decoration: none;
+  color: white;
+  font-size: 2.5rem;
+  transition: .2s;
+}
+.social-links-div a:hover {
+  color: var(--background-color);
+}
