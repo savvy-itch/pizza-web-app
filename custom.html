@@ -41,39 +41,59 @@
   </header>
 
   <main>
-    <div class="container">
-      <h1>Create your own pizza</h1>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate repellat quas totam delectus corporis magnam ab distinctio. Commodi, ut obcaecati.</p>
-      <div class="size-btn-container">
-        <button>S</button>
-        <button>M</button>
-        <button>L</button>
-      </div>
-      <section class="pizza-constructor-container">
-        <div class="pizza-constructor-image">
-          <img class="pizza-base-image" src="./images/ingredients/pizza-base.png" alt="pizza base">
-          <img class="pizza-topping-image" src="./images/ingredients/cheese.png" alt="cheese">
-          <img class="pizza-topping-image" src="./images/ingredients/peppers.png" alt="cheese">
-        </div>
-        <div class="toppings-container">
-          <h3>Choose toppings:</h3>
-          <div class="topping-btn-container">
-            <button class="topping-btn">Bacon</button>
-            <button class="topping-btn active">Cheese</button>
-            <button class="topping-btn">Meatballs</button>
-            <button class="topping-btn">Olives</button>
-            <button class="topping-btn">Parsley</button>
-            <button class="topping-btn">Pepperoni</button>
-            <button class="topping-btn">Peppers</button>        
+    <section class="create-section">
+      <div class="container">
+        <h1>Create Your Own Pizza</h1>
+        <p class="create-pizza-desc">Create your own pizza by choosing its size and toppings! Select from three sizes and over 6 individual types of toppings.</p>
+        <section class="pizza-constructor-container">
+          <div class="pizza-constructor-image">
+            <img class="pizza-base-image" src="./images/ingredients/pizza-base.png" alt="pizza base">
+            <img class="pizza-topping-image" src="./images/ingredients/cheese.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/peppers.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/bacon.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/pepperoni.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/olives.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/meatballs.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/parsley.png" alt="cheese">
           </div>
+          <div class="pizza-settings-container">
+            <h3>Choose size: </h3>
+            <div class="size-btn-container">
+              <button class="size-btn">
+                S
+                <span>£7.25</span>
+              </button>
+              <button class="size-btn active">
+                M
+                <span>£9.25</span>
+              </button>
+              <button class="size-btn">
+                L
+                <span>£11.25</span>
+              </button>
+            </div>
+            <h3>Choose toppings:</h3>
+            <div class="topping-btn-container">
+              <button class="topping-btn">Bacon</button>
+              <button class="topping-btn active">Cheese</button>
+              <button class="topping-btn">Meatballs</button>
+              <button class="topping-btn">Olives</button>
+              <button class="topping-btn">Parsley</button>
+              <button class="topping-btn">Pepperoni</button>
+              <button class="topping-btn">Peppers</button>
+            </div>
+          </div>
+        </section>
+        <div class="cart-btn-container">
+          <a href="./cart.html">
+            <button class="add-to-cart-btn">
+              Add to Cart
+              <span class="total-price">£20.25</span>
+            </button>
+          </a>
         </div>
-      </section>
-      <div class="cart-btn-container">
-        <a href="./cart.html">
-          <button class="add-to-cart-btn">Add to Cart</button>
-        </a>
       </div>
-    </div>
+    </section>
   </main>
 
   <script src="./nav.js"></script>

@@ -133,7 +133,15 @@ nav a,
     transform: scaleX(1)
   }
 }
+@media screen and (max-width: 1024px) {
+  .nav-center {
+    padding: 1rem 2rem;
+  }
+}
 @media screen and (max-width: 800px) {
+  .nav-center {
+    padding: 1rem;
+  }
   .nav-header {
     display: grid;
     grid-template-columns: 4fr 1fr 1fr;
