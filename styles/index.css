@@ -3,7 +3,7 @@ body {
 }
 .container {
   min-height: 100vh;
-  background-image: url('../images/pizza-background.png');
+  background-image: url('./images/pizza-background.png');
   display: flex;
   justify-content: space-between;
 }
@@ -15,7 +15,7 @@ body {
   justify-content: center;
 }
 .pizza-image {
-  background-image: url("../images/pizza2.png");
+  background-image: url("./images/pizza2.png");
   flex-grow: 1;
   max-height: 70vh;
   min-width: 30%;
