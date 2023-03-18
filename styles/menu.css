@@ -143,7 +143,7 @@ body {
   top: -15px;
   right: -15px;
 }
-#discount-old-price {
+.menu-grid .discount-old-price {
   text-decoration: line-through;
   font-size: 1.1rem;
   color: #969AB0;

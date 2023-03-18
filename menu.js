@@ -1,11 +1,13 @@
 import menu from './data.js';
-// add random discount
-// on add click, add pizza to cart and display number on cart icon;
+import {displayOrderQuantity} from './displayOrderQuantity.js';
 
 const menuGrid = document.getElementById('menu-grid');
 let discountPercent = 10;
 
-document.addEventListener('DOMContentLoaded', displayMenuItems);
+document.addEventListener('DOMContentLoaded', () => {
+  displayMenuItems(); 
+  displayOrderQuantity();
+});
 
 function displayMenuItems() {
   menu.map(item => {
@@ -21,7 +23,7 @@ function displayMenuItems() {
       <div class="single-pizza-info">
         <p class="pizza-price">
         ${item.isDiscount
-          ? `<span id="discount-old-price">£${item.price.m}</span>
+          ? `<span class="discount-old-price">£${item.price.m}</span>
             £${setDiscountPrice(item.price.m, discountPercent)}</p>`
           : `£${item.price.m}`
         }
@@ -46,6 +48,12 @@ function displayMenuItems() {
         btn.classList.add('active');
       });
     });
+
+    const addBtn = singlePizza.querySelector('.add-btn');
+    addBtn.addEventListener('click', (e) => {
+      addPizzaToCart(e);
+      displayOrderQuantity();
+    });
   });
 }
 
@@ -55,22 +63,27 @@ function changeSize(e) {
   const singlePizza = e.target.parentElement.parentElement;
   const pizzaTitle = singlePizza.querySelector('.pizza-info-heading').innerText;
   // find object with the name of current pizza
-  let pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);
+  const pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);
   let newPrice = pizzaFromDb.price[currentSize.toLowerCase()];
+  const priceElement = singlePizza.querySelector('.pizza-price');
+  // display new price
   // if the pizza has a discount
   if (pizzaFromDb.isDiscount) {
-    // console.log(newPrice);
-    newPrice = setDiscountPrice(newPrice, discountPercent);
-    // console.log(newPrice);
-    singlePizza.querySelector('.pizza-price').textContent = `£${newPrice}`;
+    // check if discount wasn't already displayed (for M size by default)
+    if (!priceElement.querySelector('.discount-old-price')) {
+      newPrice = setDiscountPrice(newPrice, discountPercent);
+    }
+    const newContent = `
+      <span class="discount-old-price">£${newPrice}</span>
+      £${setDiscountPrice(newPrice, discountPercent)}`
+    priceElement.innerHTML = newContent;
   } else {
     singlePizza.querySelector('.pizza-price').textContent = `£${newPrice}`;
   }
-  displayDiscountPrice(e.target.parentElement.parentElement);
 }
 
+// add discount tag on pizza
 function setDiscountTag(item, percent) {
-  // add discount tag on pizza
   item.querySelector('.size-btn-container')
     .insertAdjacentHTML('afterend', `<div class="discount-tag">-${percent}%</div>`);
 }
@@ -81,16 +94,30 @@ function setDiscountPrice(price, percent) {
   return price;
 }
 
-// !!!!!!!!!!!!!! неверно работает
-function displayDiscountPrice(pizzaElement) {
-  const priceElement = pizzaElement.querySelector('.pizza-price');
-  const pizzaTitle = pizzaElement.querySelector('.pizza-info-heading').innerText;
+// add order to local storage
+function addPizzaToCart(e) {
+  const currentPizza = e.target.parentElement;
+  const currentSize = currentPizza.querySelector('.active').textContent.toLowerCase();
+  const pizzaTitle = currentPizza.querySelector('.pizza-info-heading').textContent;
   const pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);
-  const currentSize = pizzaElement.querySelector('.active').textContent;
-  const oldPrice = pizzaFromDb.price[currentSize.toLowerCase()];
-  const newContent = `
-    <span id="discount-old-price">£${oldPrice}</span>
-    £${setDiscountPrice(oldPrice, discountPercent)}
-  `
-  priceElement.innerHTML = newContent;
+  const {title, imgUrl, price, isDiscount} = pizzaFromDb;
+  const pizzaDataToStore = {title, imgUrl, isDiscount};
+  pizzaDataToStore.price = price[currentSize];
+  
+  const orders = localStorage.getItem('pizzas') ?? '[]';
+  const storedOrders = JSON.parse(orders);
+  storedOrders.push(pizzaDataToStore);
+  localStorage.setItem('pizzas', JSON.stringify(storedOrders));
 }
+
+// display order quantity on cart icon in navbar
+// function displayOrderQuantity() {
+//   const storedOrders = localStorage.getItem('pizzas');
+//   const quantityDiv = document.querySelectorAll('.order-quantity')
+
+//   // if orders quantity > 0
+//   if (storedOrders) {
+//     const ordersArray = JSON.parse(storedOrders);
+//     quantityDiv.forEach(el => el.textContent = ordersArray.length);
+//   }
+// }

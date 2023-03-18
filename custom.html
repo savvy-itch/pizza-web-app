@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizza Website Project</title>
+  <title>Create Pizza</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/custom.css">
@@ -19,7 +19,10 @@
             <img class="logo" src="./images/logo.png" alt="pizza-logo">
             Pizza O'Clock
           </div>
-          <a class="cart-link-sm" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+          <a class="cart-link-sm" href="./cart.html">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <div class="order-quantity"></div>
+          </a>
           <button class="nav-toggle">
             <i class="fas fa-bars"></i>
           </button>
@@ -35,7 +38,10 @@
             <a href="./contact.html">contact</a>
           </li>
         </ul>
-        <a class="cart-link" href="./cart.html"><i class="fa-solid fa-basket-shopping"></i></a>
+        <a class="cart-link" href="./cart.html">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <div class="order-quantity"></div>
+        </a>
       </div>
     </nav>
   </header>
@@ -48,18 +54,18 @@
         <section class="pizza-constructor-container">
           <div class="pizza-constructor-image">
             <img class="pizza-base-image" src="./images/ingredients/pizza-base.png" alt="pizza base">
-            <img class="pizza-topping-image" src="./images/ingredients/cheese.png" alt="cheese">
+            <!-- <img class="pizza-topping-image" src="./images/ingredients/cheese.png" alt="cheese">
             <img class="pizza-topping-image" src="./images/ingredients/peppers.png" alt="cheese">
             <img class="pizza-topping-image" src="./images/ingredients/bacon.png" alt="cheese">
             <img class="pizza-topping-image" src="./images/ingredients/pepperoni.png" alt="cheese">
             <img class="pizza-topping-image" src="./images/ingredients/olives.png" alt="cheese">
             <img class="pizza-topping-image" src="./images/ingredients/meatballs.png" alt="cheese">
-            <img class="pizza-topping-image" src="./images/ingredients/parsley.png" alt="cheese">
+            <img class="pizza-topping-image" src="./images/ingredients/parsley.png" alt="cheese"> -->
           </div>
           <div class="pizza-settings-container">
             <h3>Choose size: </h3>
             <div class="size-btn-container">
-              <button class="size-btn">
+              <!-- <button class="size-btn">
                 S
                 <span>£7.25</span>
               </button>
@@ -70,22 +76,22 @@
               <button class="size-btn">
                 L
                 <span>£11.25</span>
-              </button>
+              </button> -->
             </div>
             <h3>Choose toppings:</h3>
             <div class="topping-btn-container">
-              <button class="topping-btn">Bacon</button>
+              <!-- <button class="topping-btn">Bacon</button>
               <button class="topping-btn active">Cheese</button>
               <button class="topping-btn">Meatballs</button>
               <button class="topping-btn">Olives</button>
               <button class="topping-btn">Parsley</button>
               <button class="topping-btn">Pepperoni</button>
-              <button class="topping-btn">Peppers</button>
+              <button class="topping-btn">Peppers</button> -->
             </div>
           </div>
         </section>
         <div class="cart-btn-container">
-          <button class="add-to-cart-btn">
+          <button id="add-btn" class="add-to-cart-btn">
             Add to Cart
             <span class="total-price">£20.25</span>
           </button>
@@ -95,5 +101,7 @@
   </main>
   <!-- возможно, добавить ещё кнопку перейти в корзину рядом с 'add to cart' -->
   <script src="./nav.js"></script>
+  <script src="./custom.js" type="module"></script>
+  <script src="./main.js" type="module"></script>
 </body>
 </html>

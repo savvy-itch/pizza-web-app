@@ -75,6 +75,20 @@ nav a,
 .show-links {
   height: 10rem;
 }
+.cart-link {
+  position: relative;
+}
+.order-quantity {
+  position: absolute;
+  top: -13px;
+  right: -17px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .cart-link,
 .cart-link-sm {
   color: var(--text-color);
@@ -149,5 +163,8 @@ nav a,
   }
   .cart-link {
     display: none;
+  }
+  .cart-link-sm {
+    position: relative;
   }
 }
