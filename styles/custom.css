@@ -118,6 +118,11 @@ h1 {
   background-color: var(--background-color);
   color: #FFAA2C; 
 }
+.add-to-cart-btn:disabled {
+  cursor: not-allowed;
+  background-color: hsl(229, 13%, 46%);
+  color: var(--text-color)
+}
 .total-price {
   font-size: 1.2rem;
 }

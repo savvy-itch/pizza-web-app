@@ -1,21 +1,25 @@
 import { sizes, ingredients } from "./ingredients.js";
+import {displayOrderQuantity} from './displayOrderQuantity.js';
 
-// update total cost in add to cart button on every change
-// on add to cart button update local storage
-// make add to cart button disabled if no toppings are selected
 // maybe add events to enter key press
 
 const sizeBtnDiv = document.querySelector('.size-btn-container');
 const toppingBtnDiv = document.querySelector('.topping-btn-container');
 const pizzaConstructorDiv = document.querySelector('.pizza-constructor-image');
 const addBtn = document.getElementById('add-btn');
+const totalPrice = document.querySelector('.total-price');
 
 document.addEventListener('DOMContentLoaded', () => {
   displaySizes();
   displayIngredients();
   updateTotalCost();
+  displayOrderQuantity();
 });
-addBtn.addEventListener('click', addPizzaToCart);
+addBtn.addEventListener('click', () => {
+  addPizzaToCart();
+  displayOrderQuantity();
+});
+  
 
 function displaySizes() {
   sizes.map(size => {
@@ -32,11 +36,11 @@ function displaySizes() {
   const sizeBtns = [...document.querySelectorAll('.size-btn')];
   sizeBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      updateTotalCost();
       sizeBtns.forEach(btn => {
         btn.classList.remove('active');
       })
       btn.classList.add('active');
+      updateTotalCost();
     });
   });
 }
@@ -81,12 +85,39 @@ function addTopping(e) {
   }
 }
 
+let total = 0;
 function updateTotalCost() {
+  // add pizza size price
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size');
+  const sizeFromDb = sizes.find(el => el.size === selectedSize.textContent);
+  total = Number(sizeFromDb.price);
 
-  let total; 
+  // add toppings price
+  const selectedToppings = [...toppingBtnDiv.querySelectorAll('.active')];
+  // if no toppings were selected, disable add button
+  if (selectedToppings.length < 1) {
+    addBtn.setAttribute("disabled", "disabled");
+  } else {
+    addBtn.removeAttribute("disabled");
+    let toppingsTotal = 0;
+    selectedToppings.forEach(btn => {
+      let toppingFromDb = ingredients.find(el => el.topping === btn.textContent);
+      toppingsTotal += parseFloat(toppingFromDb.price);
+    });
+    total += toppingsTotal;
+  }
+  total = total.toFixed(2);
+  totalPrice.textContent = `£${total}`;
 }
 
 function addPizzaToCart() {
-  //
+  const orders = localStorage.getItem('pizzas') ?? '[]';
+  const storedOrders = JSON.parse(orders);
+  const customPizza = {
+    title: 'Custom pizza',
+    imgUrl: './images/custom-pizza.png',
+  };
+  customPizza.price = total;
+  storedOrders.push(customPizza);
+  localStorage.setItem('pizzas', JSON.stringify(storedOrders));
 }

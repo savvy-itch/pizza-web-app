@@ -19,6 +19,36 @@ h1 {
   padding: 1rem;
   box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
 }
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.empty-cart p {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.empty-cart img {
+  max-width: 25%;
+  height: auto;
+}
+.empty-cart button {
+  background-color: var(--highlighted-color);
+  color: var(--text-color);
+  padding: .8rem 1rem;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: .3s;
+}
+.empty-cart button:hover,
+.empty-cart button:focus {
+  box-shadow: 0px 0px 12px 5px rgba(255,170,44,0.8); 
+}
 .order {
   display: grid;
   grid-template-columns: 1.1fr 4fr 1fr;
@@ -107,14 +137,14 @@ h1 {
   color: var(--background-color);
   text-transform: uppercase;
 }
-.confim-div {
+.confirm-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
 }
-.confim-div input {
+.confirm-div input {
   padding: .5rem;
   font-size: 1.2rem;
   color: var(--background-color);
@@ -122,7 +152,7 @@ h1 {
   width: 100%;
   margin: 1.5rem 0;
 }
-.confim-div button {
+.confirm-div button {
   font-size: 1.2rem;
   padding: .7rem;
   font-weight: 600;
@@ -134,8 +164,8 @@ h1 {
   cursor: pointer;
   transform: .2s;
 }
-.confim-div button:hover,
-.confim-div button:focus {
+.confirm-div button:hover,
+.confirm-div button:focus {
   background-color: var(--background-color);
   color: var(--highlighted-color);
 }

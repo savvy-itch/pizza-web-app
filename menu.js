@@ -102,22 +102,10 @@ function addPizzaToCart(e) {
   const pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);
   const {title, imgUrl, price, isDiscount} = pizzaFromDb;
   const pizzaDataToStore = {title, imgUrl, isDiscount};
-  pizzaDataToStore.price = price[currentSize];
-  
+  pizzaDataToStore.price = isDiscount ? setDiscountPrice(price[currentSize], discountPercent) : price[currentSize];
   const orders = localStorage.getItem('pizzas') ?? '[]';
-  const storedOrders = JSON.parse(orders);
+  let storedOrders = JSON.parse(orders);
+  
   storedOrders.push(pizzaDataToStore);
   localStorage.setItem('pizzas', JSON.stringify(storedOrders));
 }
-
-// display order quantity on cart icon in navbar
-// function displayOrderQuantity() {
-//   const storedOrders = localStorage.getItem('pizzas');
-//   const quantityDiv = document.querySelectorAll('.order-quantity')
-
-//   // if orders quantity > 0
-//   if (storedOrders) {
-//     const ordersArray = JSON.parse(storedOrders);
-//     quantityDiv.forEach(el => el.textContent = ordersArray.length);
-//   }
-// }

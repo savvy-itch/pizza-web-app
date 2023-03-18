@@ -6,6 +6,7 @@
 - Menu
 - Contact
 - Cart
+(maybe add icons before links on small screens)
 
 ### Button "View Menu"
 ### Button "Create Your Own Pizza"
