@@ -50,46 +50,17 @@
     <section class="container">
       <h1>Your Cart</h1>
       <div class="cart">
-        <!-- <div class="order">
-          <div class="order-image">
-            <img src="./images/menu-pizza2.png" alt="pizza">
-          </div>
-          <div class="order-info">
-            <p class="order-title">Pizza Title</p>
-            <p class="order-cost">£14.25</p>
-            <button class="remove-btn">Remove</button>
-          </div>
-          <div class="amount-div">
-            <button>-</button>
-            <p>3</p>
-            <button>+</button>
-          </div>
-        </div>
-        <div class="line"></div>
-        <div class="order">
-          <div class="order-image">
-            <img src="./images/menu-pizza2.png" alt="pizza">
-          </div>
-          <div class="order-info">
-            <p class="order-title">Pizza Title</p>
-            <p class="order-cost">£14.25</p>
-            <button class="remove-btn">Remove</button>
-          </div>
-          <div class="amount-div">
-            <button>-</button>
-            <p>3</p>
-            <button>+</button>
-          </div>
-        </div> -->
       </div>
       <div class="total-cost">
         <p>Total: </p>
-        <p>£28.50</p>
+        <p id="total-cost">£28.50</p>
       </div>
       <div class="confirm-div">
         <h3>Enter your email to confirm your order</h3>
-        <input type="email" placeholder="example@mail.com">
-        <button type="submit">Confirm Order</button>
+        <form method="post">
+          <input id="email-input" type="email" placeholder="example@mail.com">
+          <button id="confirm-btn" type="submit">Confirm Order</button>
+        </form>
       </div>
     </section>
   </main>
@@ -97,5 +68,6 @@
   <script src="./nav.js"></script>
   <script type="module" src="./main.js"></script>
   <script type="module" src="./cart.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ import {displayOrderQuantity} from './displayOrderQuantity.js';
 
 const menuGrid = document.getElementById('menu-grid');
 let discountPercent = 10;
+let ordersArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   displayMenuItems(); 
@@ -103,9 +104,30 @@ function addPizzaToCart(e) {
   const {title, imgUrl, price, isDiscount} = pizzaFromDb;
   const pizzaDataToStore = {title, imgUrl, isDiscount};
   pizzaDataToStore.price = isDiscount ? setDiscountPrice(price[currentSize], discountPercent) : price[currentSize];
+  pizzaDataToStore.size = currentSize;
+  pizzaDataToStore.amount = 1;
   const orders = localStorage.getItem('pizzas') ?? '[]';
   let storedOrders = JSON.parse(orders);
-  
-  storedOrders.push(pizzaDataToStore);
-  localStorage.setItem('pizzas', JSON.stringify(storedOrders));
+
+  let isMatchFound = false;
+  ordersArray = storedOrders.reduce((acc, obj) => {
+    // if such order is already in the array
+    if (obj.title === pizzaDataToStore.title && obj.price === pizzaDataToStore.price) {
+      // increase its amount
+      obj.amount++;
+      isMatchFound = true;
+    }
+    acc.push(obj);
+    return acc;
+  }, [])
+  // if there's no such order in the array
+  if (!isMatchFound) {
+    // add it to the array
+    ordersArray.push(pizzaDataToStore);
+  } else {
+    // set back the flag to false for the next iteration
+    isMatchFound = false;
+  }
+
+  localStorage.setItem('pizzas', JSON.stringify(ordersArray));
 }

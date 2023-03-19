@@ -2,7 +2,7 @@ body {
   max-height: 100vh;
   /* height: 100vh; */
   background-image: url('../images/pizza-background.png');
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .create-section {
   display: flex;

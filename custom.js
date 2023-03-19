@@ -8,6 +8,7 @@ const toppingBtnDiv = document.querySelector('.topping-btn-container');
 const pizzaConstructorDiv = document.querySelector('.pizza-constructor-image');
 const addBtn = document.getElementById('add-btn');
 const totalPrice = document.querySelector('.total-price');
+let ordersArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   displaySizes();
@@ -19,7 +20,7 @@ addBtn.addEventListener('click', () => {
   addPizzaToCart();
   displayOrderQuantity();
 });
-  
+
 
 function displaySizes() {
   sizes.map(size => {
@@ -113,11 +114,34 @@ function updateTotalCost() {
 function addPizzaToCart() {
   const orders = localStorage.getItem('pizzas') ?? '[]';
   const storedOrders = JSON.parse(orders);
+  const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size').textContent;
   const customPizza = {
     title: 'Custom pizza',
     imgUrl: './images/custom-pizza.png',
+    amount: 1,
+    size: selectedSize,
   };
   customPizza.price = total;
-  storedOrders.push(customPizza);
-  localStorage.setItem('pizzas', JSON.stringify(storedOrders));
+
+  let isMatchFound = false;
+  ordersArray = storedOrders.reduce((acc, obj) => {
+    // if such order is already in the array
+    if (obj.title === customPizza.title && obj.price === customPizza.price) {
+      // increase its amount
+      obj.amount++;
+      isMatchFound = true;
+    }
+    acc.push(obj);
+    return acc;
+  }, [])
+  // if there's no such order in the array
+  if (!isMatchFound) {
+    // add it to the array
+    ordersArray.push(customPizza);
+  } else {
+    // set back the flag to false for the next iteration
+    isMatchFound = false;
+  }
+  // storedOrders.push(customPizza);
+  localStorage.setItem('pizzas', JSON.stringify(ordersArray));
 }

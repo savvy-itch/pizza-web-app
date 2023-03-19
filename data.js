@@ -65,9 +65,9 @@ const menu = [
     ingredients: 'Dough, Mozzarella, Cheddar, tomatoes, Parmesan',
     imgUrl: './images/menu-pizza6.png',
     price: {
-      s: 11.45,
-      m: 13.15,
-      l: 14.48,
+      s: '11.45',
+      m: '13.15',
+      l: '14.48',
     },
     isDiscount: false,
   },
