@@ -155,9 +155,9 @@ function checkEmailValidity(email) {
 function sendEmail() {
   Email.send({
     SecureToken : "ab2816f0-699d-4fbb-a5da-7b59306337fb",
-    To : 'sprone3@gmail.com',
+    To : `${emailInput.value}`,
     From : "pizzaoclock69@gmail.com",
-    Subject : "This is the subject",
+    Subject : "Your Order Is Confirmed",
     Body : "And this is the body"
 }).then(
   message => alert(message)
