@@ -142,8 +142,8 @@ function updateTotalCost() {
 function emailOrderDetails(e) {
   e.preventDefault();
   formEmail();
-  console.log(emailContent)
-  // sendEmail();
+  // console.log(emailContent)
+  sendEmail();
 }
 
 // taken from https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
