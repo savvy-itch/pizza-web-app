@@ -159,7 +159,7 @@ function sendEmail() {
     From : "pizzaoclock69@gmail.com",
     Subject : "Your Order Is Confirmed",
     Body : `<html>
-      ${displayOrder()}
+      ${displayOrder}
     </html>`
 }).then(
   message => alert(message)
