@@ -142,7 +142,6 @@ function updateTotalCost() {
 function emailOrderDetails(e) {
   e.preventDefault();
   formEmail();
-  // console.log(emailContent)
   sendEmail();
 }
 
@@ -163,7 +162,6 @@ function formEmail() {
       <td>${pizza.title}</td>
       <td>£${pizza.price}</td>
       <td>${pizza.amount}</td>`;
-    console.log(new XMLSerializer().serializeToString(pizzaElem))
     pizzaElem = new XMLSerializer().serializeToString(pizzaElem);
     emailContent += pizzaElem;
   });
@@ -177,13 +175,24 @@ function sendEmail() {
     Subject : "Your Order Is Confirmed",
     Body : `
       <html>
-        <h1>This is the heading</h1>
+        <h1>Thank you shopping in our store!</h1>
+        <h3>Here are your order details</h3>
         <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Price</th>
+              <th>Amount</th>
+            </tr> 
+          </thead>
           ${emailContent}
           </tbody>
+          <hr>
         </table>
-      </html>
-    `
+        <h4>Expect a phone call from our operators to inquire about delivery.</h4>
+        <h2 style="text-align: center; margin: 1rem 0; font-style: italic;">Happy Pizza Time!:)</h2>
+      </html>`
 }).then(
   message => alert(message)
 );
