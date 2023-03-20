@@ -3,25 +3,16 @@ import {displayOrderQuantity} from './displayOrderQuantity.js';
 const cartDiv = document.querySelector('.cart');
 const confirmDiv = document.querySelector('.confirm-div');
 const totalCost = document.getElementById('total-cost');
-const emailInput = document.getElementById('email-input');
 const confirmBtn = document.getElementById('confirm-btn');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
-let emailContent = '<tbody>';
 
-let cartOrders = [];
-
-// email order details on confirm
-// after confirming order remove order from cart and storage
 // maybe  display ingredients
 
 document.addEventListener('DOMContentLoaded', () => {
   displayOrder();
   displayOrderQuantity();
-  removeLastLine();
-  updateTotalCost();
 });
-confirmBtn.addEventListener('click', e => emailOrderDetails(e));
 
 function displayOrder() {
   // if no orders were made
@@ -58,10 +49,13 @@ function displayOrder() {
       decBtn.addEventListener('click', e => updateAmount(e, 'decrease'));
       removeBtn.addEventListener('click', e => removeItem(e));
     });
+    removeLastLine();
+    updateTotalCost();
   }
 }
 
 function displayEmptyCartMsg() {
+  cartDiv.innerHTML = '';
   const emptyCartMsg = document.createElement('div');
   emptyCartMsg.className = 'empty-cart';
   let msgContent = `
@@ -71,6 +65,7 @@ function displayEmptyCartMsg() {
   emptyCartMsg.innerHTML = msgContent;
   cartDiv.appendChild(emptyCartMsg);
   confirmDiv.style.display = 'none';
+  displayOrderQuantity();
 }
 
 function updateAmount(e, operation) {
@@ -129,72 +124,12 @@ function removeItem(e) {
   updateTotalCost();
 }
 
-let total = 0;
 function updateTotalCost() {
+  let total = 0;
   storedOrders.forEach(pizza => {
     let pizzaPrice = pizza.price * pizza.amount;
     total += pizzaPrice;
   })
   total = total.toFixed(2);
   totalCost.textContent = `£${total}`;
-}
-
-function emailOrderDetails(e) {
-  e.preventDefault();
-  formEmail();
-  sendEmail();
-}
-
-// taken from https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-function checkEmailValidity(email) {
-  return String(email)
-    .toLowerCase()
-    .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
-}
-
-function formEmail() {
-  storedOrders.map(pizza => {
-    let pizzaElem = document.createElement('tr');
-    pizzaElem.innerHTML = `
-      <td style="text-align:center;padding:3px">${pizza.imgUrl}</td>
-      <td style="text-align:center;padding:3px">${pizza.title}</td>
-      <td style="text-align:center;padding:3px">£${pizza.price}</td>
-      <td style="text-align:center;padding:3px">${pizza.amount}</td>`;
-    pizzaElem = new XMLSerializer().serializeToString(pizzaElem);
-    emailContent += pizzaElem;
-  });
-}
-
-function sendEmail() {
-  Email.send({
-    SecureToken : "ab2816f0-699d-4fbb-a5da-7b59306337fb",
-    To : `${emailInput.value}`,
-    From : "pizzaoclock69@gmail.com",
-    Subject : "Your Order Is Confirmed",
-    Body : `
-      <html>
-        <h1>Thank you shopping in our store!</h1>
-        <h3>Here are your order details</h3>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Amount</th>
-            </tr> 
-          </thead>
-          ${emailContent}
-          </tbody>
-          <hr>
-          <p><strong>Total: £${total}</strong></p>
-        </table>
-        <h4>Expect a phone call from our operators to inquire about delivery.</h4>
-        <h2 style="text-align: center; margin: 1rem 0; font-style: italic;">Happy Pizza Time!:)</h2>
-      </html>`
-}).then(
-  message => alert(message)
-);
 }

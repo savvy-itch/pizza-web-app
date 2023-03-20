@@ -12,5 +12,7 @@ export function displayOrderQuantity() {
     } else {
       quantityDiv.forEach(el => el.textContent = '');
     }
+  } else {
+    quantityDiv.forEach(el => el.textContent = '');
   }
 }
