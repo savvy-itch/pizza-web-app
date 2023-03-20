@@ -174,114 +174,25 @@ function sendEmail() {
     From : "pizzaoclock69@gmail.com",
     Subject : "Your Order Is Confirmed",
     Body : `
-    <heml>
-      <head>
-        <subject>Email is awesome</subject>
-        <preview>Learn about all the cool things you can do with email today!</preview>
-          <style>
-            body {
-              background: #EEE;
-            }
-
-            container {
-              background: white;
-            }
-
-            hr {
-              border-color: #DDD;
-            }
-
-            button {
-              background: #333;
-              padding: 10px 20px;
-            }
-            container {
-              max-width: 700px;
-              margin: 10px auto;
-              padding: 10px 20px;
-            }
-          
-            button {
-              margin: 10px 0;
-            }
-          
-            column {
-              padding: 0 10px;
-            }
-          </style>
-      </head>
-      <body>
-      <container>
-        <row>
-          <column>
-            <h1>Hey there! 👋</h1>
-            <p>Thanks for giving HEML a try! Let us know if you run into any issues or build something awesome with it!</p>
-          </column>
-        </row>
-        <hr>
-        <row>
-          <column>
-            <h3>Make games</h3>
-            <p>The dynamic duo, Camiah, have made some awesome games in emails!</p>
-            <button href="https://codepen.io/reallygoodemails/pen/WGzdXk">Sweep bombs 💣</button>
-          </column>
-          <column>
-            <h3>Show a slideshow</h3>
-            <p>Lego sent out an email showing off some of their new sets.</p>
-            <button href="https://codepen.io/reallygoodemails/pen/EXdgjY">Check it out 🕵</button>
-          </column>
-          <column>
-            <h3>Win back customers</h3>
-            <p>Really Good Emails has collected a series of emails to win you back.</p>
-            <button href="https://reallygoodemails.com/category/promotional/winback/">Open your heart ❤️</button>
-          </column>
-        </row>
-      </container>
-      </body>
-    </heml>`
+      <html>
+        <h1>This is the heading</h1>
+        <table>
+          <tbody border>
+            <tr>
+              <td>1st Col</td>
+              <td style="background-color: green">2nd Col</td>
+              <td>3rd Col</td>
+            </tr>
+            <tr>
+              <td>1st Col</td>
+              <td style="font-size: 1.5rem" colspan="2">2nd Col</td>
+            </tr>
+          </tbody>
+        </table>
+        ${emailContent}
+      </html>
+    `
 }).then(
   message => alert(message)
 );
 }
-
-
-{/* <html>
-    <style>
-    .order {
-      display: grid;
-      grid-template-columns: 1.1fr 4fr .8fr;
-      align-items: center;
-      gap: .5rem;
-      margin: .7rem 0;
-    }
-    .order-image img {
-      max-width: 100%;
-      height: auto;
-    }
-    .order-info {
-      display: flex;
-      flex-direction: column;
-      padding-left: 1rem;
-    }
-    .order-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #24262F;
-    }
-    .order-cost {
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: #24262F;
-    }
-    .amount-div {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: #24262F;
-    }
-    </style>
-      ${emailContent}
-    </html>*/}
