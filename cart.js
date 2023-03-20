@@ -7,7 +7,7 @@ const emailInput = document.getElementById('email-input');
 const confirmBtn = document.getElementById('confirm-btn');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
-let emailContent = '';
+let emailContent;
 
 let cartOrders = [];
 
@@ -49,22 +49,8 @@ function displayOrder() {
         </div>
         </div>
         <div class="line"></div>`;
-      const orderForEmail = `<div class="order">
-        <div class="order-image">
-          <img src=${imgUrl} alt=${title}>
-        </div>
-        <div class="order-info">
-          <p class="order-title">${title}</p>
-          <p class="order-cost">£<span>${price}</span></p>
-        </div>
-        <div class="amount-div">
-          <p>${amount}</p>
-        </div>
-        </div>
-        `;
       orderDiv.innerHTML = orderDetails;
       cartDiv.appendChild(orderDiv);
-      emailContent += orderForEmail;
       const incBtn = orderDiv.querySelector('.increase-btn');
       const decBtn = orderDiv.querySelector('.decrease-btn');
       const removeBtn = orderDiv.querySelector('.remove-btn');
@@ -155,6 +141,7 @@ function updateTotalCost() {
 
 function emailOrderDetails(e) {
   e.preventDefault();
+  formEmail();
   sendEmail();
 }
 
@@ -167,6 +154,19 @@ function checkEmailValidity(email) {
     );
 }
 
+function formEmail() {
+  emailContent = document.createElement('tbody');
+  storedOrders.map(pizza => {
+    const pizzaElem = document.createElement('tr');
+    pizzaElem.innerHTML = `
+      <td>${pizza.imgUrl}</td>
+      <td>${pizza.title}</td>
+      <td>£${pizza.price}</td>
+      <td>${pizza.amount}</td>`;
+    emailContent.appendChild(pizzaElem);
+  });
+}
+
 function sendEmail() {
   Email.send({
     SecureToken : "ab2816f0-699d-4fbb-a5da-7b59306337fb",
@@ -177,19 +177,8 @@ function sendEmail() {
       <html>
         <h1>This is the heading</h1>
         <table>
-          <tbody border>
-            <tr>
-              <td>1st Col</td>
-              <td style="background-color: green">2nd Col</td>
-              <td>3rd Col</td>
-            </tr>
-            <tr>
-              <td>1st Col</td>
-              <td style="font-size: 1.5rem" colspan="2">2nd Col</td>
-            </tr>
-          </tbody>
+          ${emailContent}
         </table>
-        ${emailContent}
       </html>
     `
 }).then(
