@@ -49,7 +49,7 @@ function displayOrder() {
         </div>
         </div>
         <div class="line"></div>`;
-        const orderForEmail = `<div class="order">
+      const orderForEmail = `<div class="order">
         <div class="order-image">
           <img src=${imgUrl} alt=${title}>
         </div>
@@ -174,6 +174,43 @@ function sendEmail() {
     From : "pizzaoclock69@gmail.com",
     Subject : "Your Order Is Confirmed",
     Body : `<html>
+    <style>
+    .order {
+      display: grid;
+      grid-template-columns: 1.1fr 4fr .8fr;
+      align-items: center;
+      gap: .5rem;
+      margin: .7rem 0;
+    }
+    .order-image img {
+      max-width: 100%;
+      height: auto;
+    }
+    .order-info {
+      display: flex;
+      flex-direction: column;
+      padding-left: 1rem;
+    }
+    .order-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #24262F;
+    }
+    .order-cost {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: #24262F;
+    }
+    .amount-div {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #24262F;
+    }
+    </style>
       ${emailContent}
     </html>`
 }).then(
