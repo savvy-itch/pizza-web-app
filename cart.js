@@ -7,6 +7,7 @@ const emailInput = document.getElementById('email-input');
 const confirmBtn = document.getElementById('confirm-btn');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
+let emailContent = '';
 
 let cartOrders = [];
 
@@ -48,8 +49,22 @@ function displayOrder() {
         </div>
         </div>
         <div class="line"></div>`;
+        const orderForEmail = `<div class="order">
+        <div class="order-image">
+          <img src=${imgUrl} alt=${title}>
+        </div>
+        <div class="order-info">
+          <p class="order-title">${title}</p>
+          <p class="order-cost">£<span>${price}</span></p>
+        </div>
+        <div class="amount-div">
+          <p>${amount}</p>
+        </div>
+        </div>
+        `;
       orderDiv.innerHTML = orderDetails;
       cartDiv.appendChild(orderDiv);
+      emailContent += orderForEmail;
       const incBtn = orderDiv.querySelector('.increase-btn');
       const decBtn = orderDiv.querySelector('.decrease-btn');
       const removeBtn = orderDiv.querySelector('.remove-btn');
@@ -140,7 +155,8 @@ function updateTotalCost() {
 
 function emailOrderDetails(e) {
   e.preventDefault();
-  sendEmail();
+  // sendEmail();
+  console.log(emailContent)
 }
 
 // taken from https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
@@ -159,7 +175,7 @@ function sendEmail() {
     From : "pizzaoclock69@gmail.com",
     Subject : "Your Order Is Confirmed",
     Body : `<html>
-      ${displayOrder}
+      ${emailContent}
     </html>`
 }).then(
   message => alert(message)
