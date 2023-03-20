@@ -4,7 +4,6 @@ const cartDiv = document.querySelector('.cart');
 const confirmDiv = document.querySelector('.confirm-div');
 const totalCost = document.getElementById('total-cost');
 const emailInput = document.getElementById('email-input');
-console.log(emailInput)
 const confirmBtn = document.getElementById('confirm-btn');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   removeLastLine();
   updateTotalCost();
 });
-// confirmBtn.addEventListener('click', sendEmail);
+confirmBtn.addEventListener('click', e => emailOrderDetails(e));
 
 function displayOrder() {
   // if no orders were made
@@ -155,15 +154,12 @@ function checkEmailValidity(email) {
 
 function sendEmail() {
   Email.send({
-    Host: "",
-    Username: "",
-    Password: "",
-    To: "",
-    From: "",
-    Subject: "Sending Email using javascript",
-    Body: "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>",
-  })
-    .then(function (message) {
-      alert("mail sent successfully")
-    });
+    SecureToken : "ab2816f0-699d-4fbb-a5da-7b59306337fb",
+    To : 'sprone3@gmail.com',
+    From : "pizzaoclock69@gmail.com",
+    Subject : "This is the subject",
+    Body : "And this is the body"
+}).then(
+  message => alert(message)
+);
 }
