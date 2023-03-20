@@ -7,7 +7,7 @@ const emailInput = document.getElementById('email-input');
 const confirmBtn = document.getElementById('confirm-btn');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
-let emailContent;
+let emailContent = '<tbody>';
 
 let cartOrders = [];
 
@@ -142,7 +142,8 @@ function updateTotalCost() {
 function emailOrderDetails(e) {
   e.preventDefault();
   formEmail();
-  sendEmail();
+  console.log(emailContent)
+  // sendEmail();
 }
 
 // taken from https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
@@ -155,15 +156,16 @@ function checkEmailValidity(email) {
 }
 
 function formEmail() {
-  emailContent = document.createElement('tbody');
   storedOrders.map(pizza => {
-    const pizzaElem = document.createElement('tr');
+    let pizzaElem = document.createElement('tr');
     pizzaElem.innerHTML = `
       <td>${pizza.imgUrl}</td>
       <td>${pizza.title}</td>
       <td>£${pizza.price}</td>
       <td>${pizza.amount}</td>`;
-    emailContent.appendChild(pizzaElem);
+    console.log(new XMLSerializer().serializeToString(pizzaElem))
+    pizzaElem = new XMLSerializer().serializeToString(pizzaElem);
+    emailContent += pizzaElem;
   });
 }
 
@@ -178,6 +180,7 @@ function sendEmail() {
         <h1>This is the heading</h1>
         <table>
           ${emailContent}
+          </tbody>
         </table>
       </html>
     `
