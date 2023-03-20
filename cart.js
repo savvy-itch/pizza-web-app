@@ -129,8 +129,8 @@ function removeItem(e) {
   updateTotalCost();
 }
 
+let total = 0;
 function updateTotalCost() {
-  let total = 0;
   storedOrders.forEach(pizza => {
     let pizzaPrice = pizza.price * pizza.amount;
     total += pizzaPrice;
