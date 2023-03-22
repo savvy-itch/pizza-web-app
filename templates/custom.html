@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu</title>
+  <title>Create Pizza</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <link rel="stylesheet" href="./styles/styles.css">
-  <link rel="stylesheet" href="./styles/menu.css">
-  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <link rel="stylesheet" href="/styles/custom.css">
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 </head>
 <body>
   <header>
@@ -30,7 +30,7 @@
         <!-- links -->
         <ul class="links">
           <li>
-            <a href="./index.html">
+            <a href="/index.html">
               <i class="fa-solid fa-house"></i>
               home
             </a>
@@ -55,31 +55,38 @@
       </div>
     </nav>
   </header>
-  
+
   <main>
-    <div class="container">
-      <div id="menu-grid" class="menu-grid">
-        <div class="single-pizza">
-          <img class="create-pizza-img" src="https://i.ibb.co/HTWRkns/create-pizza.png" alt="create-pizza">
-          <div class="create-pizza-info">
-            <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
-            <p class="create-info-desc">Choose From Our Options Of Design 
-              And Make Your Own Pizza.</p>
+    <section class="create-section">
+      <div class="container">
+        <h1>Create Your Own Pizza</h1>
+        <p class="create-pizza-desc">Create your own pizza by choosing its size and toppings! Select from three sizes and over 6 individual types of toppings.</p>
+        <section class="pizza-constructor-container">
+          <div class="pizza-constructor-image">
+            <img class="pizza-base-image" src="https://i.ibb.co/8Bk52SY/pizza-base.png" alt="pizza base">
           </div>
-          <a class="create-btn-link" href="./custom.html">
-            <button class="create-btn btn">Create Now</button>
-          </a>
+          <div class="pizza-settings-container">
+            <h3>Choose size: </h3>
+            <div class="size-btn-container">
+              <!-- generated in JS -->
+            </div>
+            <h3>Choose toppings:</h3>
+            <div class="topping-btn-container">
+              <!-- generated in JS -->
+            </div>
+          </div>
+        </section>
+        <div class="cart-btn-container">
+          <button id="add-btn" class="add-to-cart-btn btn">
+            Add to Cart
+            <span class="total-price"></span>
+          </button>
         </div>
       </div>
-    </div>
-    <div class="cart-btn-container">
-      <a href="./cart.html">
-        <button class="go-to-cart-btn btn">Go to Cart</button>
-      </a>
-    </div>
+    </section>
   </main>
-
-  <script src="./scripts/nav.js"></script>
-  <script src="./scripts/menu.js" type="module"></script>
+  <script src="/scripts/nav.js"></script>
+  <script src="/scripts/custom.js" type="module"></script>
+  <script src="/scripts/main.js" type="module"></script>
 </body>
 </html>

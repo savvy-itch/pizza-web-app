@@ -4,7 +4,6 @@ const confirmBtn = document.getElementById('confirm-btn');
 const nameInput = document.getElementById('name-input');
 const phoneInput = document.getElementById('phone-input');
 const emailInput = document.getElementById('email-input');
-
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
 let emailContent = '<tbody>';
@@ -19,12 +18,18 @@ confirmBtn.addEventListener('click', (e) => {
     getTotalCost();
     formEmail();
     sendEmail();
-    alert('Check your email for our letter!');
     localStorage.removeItem('pizzas');
     storedOrders = [];
     displayOrderQuantity();
   } else {
-    alert('Please enter correct information');
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Error',
+      text: 'Please enter correct values',
+      showConfirmButton: false,
+      timer: 2000
+    });
   }
 })
 
@@ -127,5 +132,13 @@ function sendEmail() {
         <h4>Expect a phone call from our operators to inquire about delivery.</h4>
         <h2 style="text-align: center; margin: 1rem 0; font-style: italic;">Happy Pizza Time!:)</h2>
       </html>`
-});
+})
+  .then(Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Email sent',
+    text: 'Check your inbox for our letter',
+    showConfirmButton: true,
+    })
+  );
 }
