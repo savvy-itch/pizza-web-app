@@ -81,7 +81,7 @@ nav a,
 .order-quantity {
   position: absolute;
   top: -13px;
-  right: -17px;
+  right: -14px;
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-color);
@@ -98,7 +98,7 @@ nav a,
   color: var(--highlighted-color);
 }
 .cart-link-sm {
-  justify-self: end;
+  justify-self: center;
 }
 .btn {
   cursor: pointer;
@@ -168,7 +168,10 @@ nav a,
   }
   .nav-header {
     display: grid;
-    grid-template-columns: 4fr 1fr 1fr;
+    grid-template-columns: 6fr 1fr 1fr;
+  }
+  .nav-logo {
+    font-size: 1.2rem;
   }
   .cart-link {
     display: none;
