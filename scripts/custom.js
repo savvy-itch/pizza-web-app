@@ -2,6 +2,7 @@ import {displayOrderQuantity} from './displayOrderQuantity.js';
 
 // maybe add events to enter key press
 
+const url = 'https://raw.githubusercontent.com/spr0neInBlazer/pizza-web-app/main/ingredients.json';
 const sizeBtnDiv = document.querySelector('.size-btn-container');
 const toppingBtnDiv = document.querySelector('.topping-btn-container');
 const pizzaConstructorDiv = document.querySelector('.pizza-constructor-image');
@@ -9,20 +10,23 @@ const addBtn = document.getElementById('add-btn');
 const totalPrice = document.querySelector('.total-price');
 let ordersArray = [];
 
-document.addEventListener('DOMContentLoaded', () => {
-  displaySizes();
-  displayIngredients();
-  updateTotalCost();
-  displayOrderQuantity();
+fetch(url)
+  .then(response => response.json())
+  .then(INGREDIENTS => {
+    displaySizes(INGREDIENTS);
+    displayIngredients(INGREDIENTS);
+    updateTotalCost(INGREDIENTS);
+    displayOrderQuantity();
 });
+
 addBtn.addEventListener('click', () => {
   addPizzaToCart();
   displayOrderQuantity();
 });
 
 
-function displaySizes() {
-  sizes.map(size => {
+function displaySizes(INGREDIENTS) {
+  INGREDIENTS['sizes'].map(size => {
     const sizeBtn = document.createElement('button');
     sizeBtn.className = 'size-btn';
     sizeBtn.innerHTML = `<span class="pizza-size">${size.size}</span><span>£${size.price}</span>`;
@@ -40,29 +44,29 @@ function displaySizes() {
         btn.classList.remove('active');
       })
       btn.classList.add('active');
-      updateTotalCost();
+      updateTotalCost(INGREDIENTS);
     });
   });
 }
 
-function displayIngredients() {
-  ingredients.map(ingredient => {
+function displayIngredients(INGREDIENTS) {
+  INGREDIENTS["ingredients"].map(ingredient => {
     const ingredientBtn = document.createElement('button');
     ingredientBtn.className = 'topping-btn';
     ingredientBtn.textContent = ingredient.topping;
     toppingBtnDiv.appendChild(ingredientBtn);
     ingredientBtn.addEventListener('click', (e) => {
       ingredientBtn.classList.toggle('active');
-      addTopping(e);
-      updateTotalCost();
+      addTopping(e, INGREDIENTS);
+      updateTotalCost(INGREDIENTS);
     })
   });
 }
 
 // add topping image to the pizza
-function addTopping(e) {
+function addTopping(e, INGREDIENTS) {
   const currentTopping = e.target;
-  const toppingFromDb = ingredients.find(el => el.topping === currentTopping.textContent);
+  const toppingFromDb = INGREDIENTS["ingredients"].find(el => el.topping === currentTopping.textContent);
 
   // add topping image
   if (currentTopping.classList.contains('active')) {
@@ -86,10 +90,10 @@ function addTopping(e) {
 }
 
 let total = 0;
-function updateTotalCost() {
+function updateTotalCost(INGREDIENTS) {
   // add pizza size price
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size');
-  const sizeFromDb = sizes.find(el => el.size === selectedSize.textContent);
+  const sizeFromDb = INGREDIENTS["sizes"].find(el => el.size === selectedSize.textContent);
   total = Number(sizeFromDb.price);
 
   // add toppings price
@@ -101,7 +105,7 @@ function updateTotalCost() {
     addBtn.removeAttribute("disabled");
     let toppingsTotal = 0;
     selectedToppings.forEach(btn => {
-      let toppingFromDb = ingredients.find(el => el.topping === btn.textContent);
+      let toppingFromDb = INGREDIENTS["ingredients"].find(el => el.topping === btn.textContent);
       toppingsTotal += parseFloat(toppingFromDb.price);
     });
     total += toppingsTotal;
@@ -110,6 +114,7 @@ function updateTotalCost() {
   totalPrice.textContent = `£${total}`;
 }
 
+// add pizza info into local storage
 function addPizzaToCart() {
   const orders = localStorage.getItem('pizzas') ?? '[]';
   const storedOrders = JSON.parse(orders);
@@ -123,6 +128,7 @@ function addPizzaToCart() {
   customPizza.price = total;
 
   let isMatchFound = false;
+  // increase amount of repeated pizzas
   ordersArray = storedOrders.reduce((acc, obj) => {
     // if such order is already in the array
     if (obj.title === customPizza.title && obj.price === customPizza.price) {
@@ -132,7 +138,8 @@ function addPizzaToCart() {
     }
     acc.push(obj);
     return acc;
-  }, [])
+  }, []);
+
   // if there's no such order in the array
   if (!isMatchFound) {
     // add it to the array

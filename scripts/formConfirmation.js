@@ -127,7 +127,5 @@ function sendEmail() {
         <h4>Expect a phone call from our operators to inquire about delivery.</h4>
         <h2 style="text-align: center; margin: 1rem 0; font-style: italic;">Happy Pizza Time!:)</h2>
       </html>`
-}).then(
-  message => alert(message)
-);
+});
 }

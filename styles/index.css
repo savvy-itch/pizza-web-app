@@ -56,10 +56,15 @@ h2 {
   text-transform: uppercase;
   border-radius: 5px;
 }
-.cta-btn:hover,
 .cta-btn:focus {
   background-color: var(--highlighted-color);
   box-shadow: 0px 0px 10px 3px var(--highlighted-color); 
+}
+@media (hover:hover) {
+  .cta-btn:hover {
+    background-color: var(--highlighted-color);
+    box-shadow: 0px 0px 10px 3px var(--highlighted-color); 
+  }
 }
 
 @media screen and (max-width: 1360px) {

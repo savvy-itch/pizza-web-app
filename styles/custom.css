@@ -2,7 +2,7 @@ body {
   --inactive-btn: hsl(229, 13%, 46%);
 
   max-height: 100vh;
-  background-image: url('../images/pizza-background.png');
+  background-image: url('https://i.ibb.co/8KBwcBV/pizza-background.png');
 }
 .create-section {
   display: flex;

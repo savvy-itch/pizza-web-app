@@ -3,7 +3,7 @@ const menu = [
     id: 1,
     title: 'Eatalian pizza',
     ingredients: 'Dough, Mozzarella, Cheddar, Blue, Parmesan',
-    imgUrl: 'https://i.ibb.co/QNSTZ0k/menu-pizza1.png',
+    imgUrl: 'https://i.ibb.co/gjswXvH/menu-pizza1.png',
     price: {
       s: '10.25',
       m: '12.30',

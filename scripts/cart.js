@@ -3,15 +3,13 @@ import {displayOrderQuantity} from './displayOrderQuantity.js';
 const cartDiv = document.querySelector('.cart');
 const confirmDiv = document.querySelector('.confirm-div');
 const totalCost = document.getElementById('total-cost');
-const confirmBtn = document.getElementById('confirm-btn');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
-
-// maybe  display ingredients
 
 document.addEventListener('DOMContentLoaded', () => {
   displayOrder();
   displayOrderQuantity();
+  updateTotalCost();
 });
 
 function displayOrder() {
@@ -69,7 +67,10 @@ function displayEmptyCartMsg() {
 }
 
 function updateAmount(e, operation) {
-  const orderDiv = e.target.parentElement.parentElement.parentElement.parentElement;
+  // if event is click then e.target is <i>, if event is Enter key then e.target is <button>
+  const orderDiv = e.target.classList.contains('fa-solid')
+    ? e.target.parentElement.parentElement.parentElement.parentElement
+    : e.target.parentElement.parentElement.parentElement;
   const orderTitle = orderDiv.querySelector('.order-title').textContent;
   const orderCost = orderDiv.querySelector('.order-cost span').textContent;
   const orderAmount = orderDiv.querySelector('.amount-div p');
