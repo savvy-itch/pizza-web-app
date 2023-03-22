@@ -27,15 +27,25 @@
             <i class="fas fa-bars"></i>
           </button>
         </div>
+        <!-- links -->
         <ul class="links">
           <li>
-            <a href="./index.html">home</a>
-          </li>    
-          <li>
-            <a href="./menu.html">menu</a>
+            <a href="./index.html">
+              <i class="fa-solid fa-house"></i>
+              home
+            </a>
           </li>
           <li>
-            <a href="./contact.html">contact</a>
+            <a href="./menu.html">
+              <i class="fa-solid fa-book-open"></i>  
+              menu
+            </a>
+          </li>
+          <li>
+            <a href="./contact.html">
+              <i class="fa-solid fa-address-card"></i>
+              contact
+            </a>
           </li>
         </ul>
         <a class="cart-link" href="./cart.html">
@@ -58,14 +68,16 @@
           <div class="pizza-settings-container">
             <h3>Choose size: </h3>
             <div class="size-btn-container">
+              <!-- generated in JS -->
             </div>
             <h3>Choose toppings:</h3>
             <div class="topping-btn-container">
+              <!-- generated in JS -->
             </div>
           </div>
         </section>
         <div class="cart-btn-container">
-          <button id="add-btn" class="add-to-cart-btn">
+          <button id="add-btn" class="add-to-cart-btn btn">
             Add to Cart
             <span class="total-price"></span>
           </button>
@@ -73,9 +85,8 @@
       </div>
     </section>
   </main>
-  <!-- возможно, добавить ещё кнопку перейти в корзину рядом с 'add to cart' -->
-  <script src="./nav.js"></script>
-  <script src="./custom.js" type="module"></script>
-  <script src="./main.js" type="module"></script>
+  <script src="./scripts/nav.js"></script>
+  <script src="./scripts/custom.js" type="module"></script>
+  <script src="./scripts/main.js" type="module"></script>
 </body>
 </html>

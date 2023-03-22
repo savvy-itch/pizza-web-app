@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizza Website Project</title>
+  <title>Cart</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/cart.css">
-  <!-- <script src="https://smtpjs.com/v3/smtp.js"></script> -->
 </head>
 <body>
   <header>
@@ -30,13 +29,22 @@
         </div>
         <ul class="links">
           <li>
-            <a href="./index.html">home</a>
+            <a href="./index.html">
+              <i class="fa-solid fa-house"></i>
+              home
+            </a>
           </li>
           <li>
-            <a href="./menu.html">menu</a>
+            <a href="./menu.html">
+              <i class="fa-solid fa-book-open"></i>
+              menu
+            </a>
           </li>
           <li>
-            <a href="./contact.html">contact</a>
+            <a href="./contact.html">
+              <i class="fa-solid fa-address-card"></i>
+              contact
+            </a>
           </li>
         </ul>
         <a class="cart-link" href="./cart.html">
@@ -57,20 +65,15 @@
         <p id="total-cost">£28.50</p>
       </div>
       <div class="confirm-div">
-        <!-- <h3>Enter your email to confirm your order</h3> -->
-        <form method="post">
-          <!-- <input id="email-input" type="email" placeholder="example@mail.com"> -->
-          <!-- <button id="confirm-btn" type="submit">Confirm Order</button> -->
-          <a href="./form.html">
-            <button id="confirm-btn" type="button">Confirm Order</button>
-          </a>
-        </form>
+        <a href="./form.html">
+          <button id="confirm-btn" type="button">Confirm Order</button>
+        </a>
       </div>
     </section>
   </main>
 
-  <script src="./nav.js"></script>
-  <script type="module" src="./main.js"></script>
-  <script type="module" src="./cart.js"></script>
+  <script src="./scripts/nav.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
+  <script type="module" src="./scripts/cart.js"></script>
 </body>
 </html>

@@ -39,10 +39,7 @@ h2 {
   background-color: var(--highlighted-color);
   color: white;
   width: 100%;
-  border: none;
   border-radius: 10px;
-  cursor: pointer;
-  transform: .2s;
 }
 .confirm-div button:hover,
 .confirm-div button:focus {

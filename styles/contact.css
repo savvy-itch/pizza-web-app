@@ -38,3 +38,65 @@ body {
 .social-links-div a:hover {
   color: var(--background-color);
 }
+.footer-container {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 1rem 3rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.footer-container a {
+  text-decoration: none;
+  color: var(--text-color);
+  display: block;
+  transition: .2s;
+}
+.footer-container a:hover {
+  color: var(--highlighted-color);
+}
+.footer-container h3 {
+  margin-bottom: 1rem;
+}
+.footer-container h5 {
+  text-align: center;
+  margin: 1rem 0;
+}
+.references {
+  text-align: end;
+}
+.dev-links {
+  display: flex;
+  min-width: 50%;
+  justify-content: space-around;
+}
+.dev-links a {
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 720px) {
+  .contact-div h2 {
+    font-size: 1.8rem;
+  }
+  .contact-div {
+    max-width: 90%;
+  }
+  .social-links-div {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 560px) {
+  .container {
+    min-height: 50vh;
+  }
+  .footer-container {
+    flex-direction: column;
+  }
+  .references {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}

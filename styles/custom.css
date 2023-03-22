@@ -1,8 +1,8 @@
 body {
+  --inactive-btn: hsl(229, 13%, 46%);
+
   max-height: 100vh;
-  /* height: 100vh; */
   background-image: url('../images/pizza-background.png');
-  /* overflow: hidden; */
 }
 .create-section {
   display: flex;
@@ -75,18 +75,18 @@ h1 {
   font-size: 1.1rem;
   font-weight: 600;
   background-color: #F5F3EF;
-  color: hsl(229, 13%, 46%);
+  color: var(--inactive-btn);
   padding: 15px 5px;
   margin: .5rem;
   min-width: 100px;
   border-radius: 10px;
-  border: 2px solid hsl(229, 13%, 46%);
+  border: 2px solid var(--inactive-btn);
   cursor: pointer;
 }
 .topping-btn-container .active,
 .size-btn-container .active {
   color: #F6752C;
-  border: 2px solid #FFAA2C;
+  border: 2px solid var(--highlighted-color);
   box-shadow: 0px 3px 10px rgba(26, 26, 33, 0.1);
 }
 
@@ -104,10 +104,7 @@ h1 {
   padding: .8rem 1rem;
   font-size: 1.5rem;
   text-transform: uppercase;
-  cursor: pointer;
-  border: none;
   border-radius: 25px;
-  transition: .3s;
   width: 350px;
   display: flex;
   justify-content: space-between;
@@ -116,17 +113,16 @@ h1 {
 .add-to-cart-btn:hover,
 .add-to-cart-btn:focus {
   background-color: var(--background-color);
-  color: #FFAA2C; 
+  color: var(--highlighted-color); 
 }
 .add-to-cart-btn:disabled {
   cursor: not-allowed;
-  background-color: hsl(229, 13%, 46%);
+  background-color: var(--inactive-btn);
   color: var(--text-color)
 }
 .total-price {
   font-size: 1.2rem;
 }
-
 
 @media screen and (max-width: 1360px) {
   .container {

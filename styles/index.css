@@ -3,7 +3,8 @@ body {
 }
 .container {
   min-height: 100vh;
-  background-image: url('/images/pizza-background.png');
+  /* background-image: url('/images/pizza-background.png'); */
+  background-image: url('https://i.ibb.co/1R2pGx4/pizza-background.png');
   display: flex;
   justify-content: space-between;
 }
@@ -15,7 +16,8 @@ body {
   justify-content: center;
 }
 .pizza-image {
-  background-image: url("/images/pizza2.png");
+  /* background-image: url("/images/pizza2.png"); */
+  background-image: url('https://i.ibb.co/t8X4YXB/pizza2.png');
   flex-grow: 1;
   max-height: 70vh;
   min-width: 30%;
@@ -48,21 +50,18 @@ h2 {
   width: 400px;
   max-width: 400px;
 }
-.btn {
+.cta-btn {
   background-color: var(--background-color);
   color: var(--text-color);
   padding: .8rem 1rem;
   font-size: 1.3rem;
   text-transform: uppercase;
-  cursor: pointer;
-  border: none;
   border-radius: 5px;
-  transition: .3s;
 }
-.btn:hover,
-.btn:focus {
+.cta-btn:hover,
+.cta-btn:focus {
   background-color: var(--highlighted-color);
-  box-shadow: 0px 0px 10px 3px rgba(255,170,44,0.8); 
+  box-shadow: 0px 0px 10px 3px var(--highlighted-color); 
 }
 
 @media screen and (max-width: 1360px) {
@@ -112,7 +111,7 @@ h2 {
   .btn-container {
     max-width: 92%
   }
-  .btn {
+  .cta-btn {
     font-size: .9rem;
   }
 }

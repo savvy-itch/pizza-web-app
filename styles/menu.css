@@ -10,10 +10,6 @@ body {
 .menu-grid {
   --button-offset: 25px;
 
-  /* display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 1fr));
-  gap: 2rem; */
-
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -26,7 +22,6 @@ body {
 
   display: flex;
   flex-direction: column;
-  /* border: 1px solid black; */
   border-radius: 10px;
   position: relative;
   align-items: center;
@@ -46,7 +41,6 @@ body {
   border: 2px solid #969AB0;
   color: #969AB0;
   font-size: 1.1rem;
-  /* padding: 5px 10px; */
   width: 38px;
   height: 38px;
   cursor: pointer;
@@ -56,9 +50,13 @@ body {
   color: white;
   background-color: #969AB0;
 }
+.single-pizza .create-pizza-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 .single-pizza img {
   max-width: 100%;
-  /* width: 100%; */
   height: 220px;
 }
 .create-pizza-info {
@@ -90,39 +88,29 @@ body {
   padding: 5px;
   color: #FD5C2E;
 }
-.add-btn {
-  background-color: #FFAA2C;
-  color: var(--text-color);
-}
 .create-btn-link {
   position: absolute;
   bottom: calc(0px - var(--button-offset));
 }
 .create-btn {
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--text-color);
   color: var(--background-color);
   padding: 1rem 2rem;
   min-width: 140px;
   border-radius: 30px;
-  border: none;
-  cursor: pointer;
   font-size: 1.1rem;
   font-weight: 600;
-  font-family: 'Signika', sans-serif;
-  transition: .2s;
 }
 .add-btn {
+  background-color: var(--highlighted-color);
+  color: var(--text-color);
   padding: 1rem 2rem;
   min-width: 140px;
   border-radius: 30px;
-  border: none;
-  cursor: pointer;
   position: absolute;
   bottom: calc(0px - var(--button-offset));
   font-size: 1.1rem;
   font-weight: 600;
-  font-family: 'Signika', sans-serif;
-  transition: .2s;
 }
 .create-btn:hover,
 .create-btn:focus,
@@ -161,10 +149,7 @@ body {
   padding: .8rem 1rem;
   font-size: 1.5rem;
   text-transform: uppercase;
-  cursor: pointer;
-  border: none;
   border-radius: 25px;
-  transition: .3s;
   width: 350px;
 }
 .go-to-cart-btn:hover,

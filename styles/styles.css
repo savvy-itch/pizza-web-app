@@ -8,10 +8,8 @@
 }
 body {
   --text-color: white;
-  --highlighted-color: #FFAA2C;
+  --highlighted-color: #ffaa2c;
   --background-color: #24262F;
-
-  font-family: 'Signika', sans-serif;
 }
 
 /* ------------ Nav Bar --------------*/
@@ -66,6 +64,8 @@ nav a,
   color: var(--highlighted-color);
   padding-left: 1.5rem;
 }
+/* heights for big screen menu and small screen dropdown
+ are generated dynamically, but also set static for no JS script users */
 .links {
   height: 0;
   overflow: hidden;
@@ -100,6 +100,12 @@ nav a,
 .cart-link-sm {
   justify-self: end;
 }
+.btn {
+  cursor: pointer;
+  border: none;
+  transition: .3s;
+}
+
 @media screen and (min-width: 800px) {
   .nav-center {
     max-width: 1170px;
@@ -122,6 +128,9 @@ nav a,
   .links a {
     padding: 0;
     margin: 0 2rem;
+  }
+  .links a > i {
+    display: none;
   }
   .links a:hover {
     padding: 0;

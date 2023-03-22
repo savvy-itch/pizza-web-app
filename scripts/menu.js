@@ -32,24 +32,24 @@ function displayMenuItems() {
         <h3 class="pizza-info-heading">${item.title}</h3>
         <p class="pizza-info-desc">${item.ingredients}</p>
       </div>
-      <button class="add-btn">Add</button>`;
+      <button class="add-btn btn">Add</button>`;
     singlePizza.innerHTML = pizzaContent;
     menuGrid.appendChild(singlePizza);
     if (item.isDiscount) {
       setDiscountTag(singlePizza, discountPercent);
     }
 
-    const sizeBtns = [...singlePizza.querySelectorAll('.size-btn')];
-    sizeBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        changeSize(e);
+    menuGrid.addEventListener('click', e => {
+      const sizeBtn = e.target.closest('.size-btn');
+      if (sizeBtn) {
+        changeSize(sizeBtn);
+        const sizeBtns = [...sizeBtn.parentElement.children];
         sizeBtns.forEach(btn => {
           btn.classList.remove('active');
         })
-        btn.classList.add('active');
-      });
+        sizeBtn.classList.add('active');
+      }
     });
-
     const addBtn = singlePizza.querySelector('.add-btn');
     addBtn.addEventListener('click', (e) => {
       addPizzaToCart(e);
@@ -59,9 +59,9 @@ function displayMenuItems() {
 }
 
 // change price on size button click
-function changeSize(e) {
-  const currentSize = e.target.innerText;
-  const singlePizza = e.target.parentElement.parentElement;
+function changeSize(sizeBtn) {
+  const currentSize = sizeBtn.innerText;
+  const singlePizza = sizeBtn.parentElement.parentElement;
   const pizzaTitle = singlePizza.querySelector('.pizza-info-heading').innerText;
   // find object with the name of current pizza
   const pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);

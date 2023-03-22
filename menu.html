@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizza Website Project</title>
+  <title>Menu</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="stylesheet" href="./styles/menu.css">
@@ -27,15 +27,25 @@
             <i class="fas fa-bars"></i>
           </button>
         </div>
+        <!-- links -->
         <ul class="links">
           <li>
-            <a href="./index.html">home</a>
+            <a href="./index.html">
+              <i class="fa-solid fa-house"></i>
+              home
+            </a>
           </li>
           <li>
-            <a href="#">menu</a>
+            <a href="./menu.html">
+              <i class="fa-solid fa-book-open"></i>  
+              menu
+            </a>
           </li>
           <li>
-            <a href="./contact.html">contact</a>
+            <a href="./contact.html">
+              <i class="fa-solid fa-address-card"></i>
+              contact
+            </a>
           </li>
         </ul>
         <a class="cart-link" href="./cart.html">
@@ -45,31 +55,31 @@
       </div>
     </nav>
   </header>
-
+  
   <main>
     <div class="container">
       <div id="menu-grid" class="menu-grid">
         <div class="single-pizza">
-          <img src="./images/create-pizza.png" alt="create-pizza">
+          <img class="create-pizza-img" src="./images/create-pizza.png" alt="create-pizza">
           <div class="create-pizza-info">
             <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
-            <p class="create-info-desc">Choose From Our Options Of Designa 
+            <p class="create-info-desc">Choose From Our Options Of Design 
               And Make Your Own Pizza.</p>
           </div>
           <a class="create-btn-link" href="./custom.html">
-            <button class="create-btn">Create Now</button>
+            <button class="create-btn btn">Create Now</button>
           </a>
         </div>
       </div>
     </div>
     <div class="cart-btn-container">
       <a href="./cart.html">
-        <button class="go-to-cart-btn">Go to Cart</button>
+        <button class="go-to-cart-btn btn">Go to Cart</button>
       </a>
     </div>
   </main>
 
-  <script src="./nav.js"></script>
-  <script src="./menu.js" type="module"></script>
+  <script src="./scripts/nav.js"></script>
+  <script src="./scripts/menu.js" type="module"></script>
 </body>
 </html>
