@@ -13,11 +13,13 @@ navToggle.addEventListener('click', function() {
 function handleLinksDisplay() {
   
   if (window.innerWidth <= 800) {
+    navToggle.style.transform = 'rotate(90deg)';
     if (links.classList.contains('show-links')) {
       let linksHeight = 0;
       liLinks.forEach(l => linksHeight += l.getBoundingClientRect().height);
       links.style.height = linksHeight + 'px';
     } else {
+      navToggle.style.transform = 'rotate(0deg)';
       links.style.height = '0';
     }
   } else {

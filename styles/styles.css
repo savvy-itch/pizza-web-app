@@ -44,9 +44,9 @@ nav a,
   transition: .2s;
   cursor: pointer;
 }
-.nav-toggle:hover {
+/* .nav-toggle:hover {
   transform: rotate(90deg);
-}
+} */
 .logo {
   height: 40px;
 }
