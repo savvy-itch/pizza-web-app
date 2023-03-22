@@ -3,8 +3,7 @@ body {
 }
 .container {
   min-height: 100vh;
-  /* background-image: url('/images/pizza-background.png'); */
-  background-image: url('https://i.ibb.co/1R2pGx4/pizza-background.png');
+  background-image: url('https://i.ibb.co/8KBwcBV/pizza-background.png');
   display: flex;
   justify-content: space-between;
 }
@@ -16,8 +15,7 @@ body {
   justify-content: center;
 }
 .pizza-image {
-  /* background-image: url("/images/pizza2.png"); */
-  background-image: url('https://i.ibb.co/t8X4YXB/pizza2.png');
+  background-image: url('https://i.ibb.co/2jV64R2/pizza2.png');
   flex-grow: 1;
   max-height: 70vh;
   min-width: 30%;

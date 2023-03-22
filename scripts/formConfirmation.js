@@ -77,7 +77,7 @@ function formEmail() {
   storedOrders.map(pizza => {
     let pizzaElem = document.createElement('tr');
     pizzaElem.innerHTML = `
-      <td style="text-align:center;padding:3px"><img style="max-width:40px" src=${pizza.imgUrl} alt="pizza-img"></td>
+      <td style="text-align:center;padding:3px"><img style="max-width:50px" src=${pizza.imgUrl} alt="pizza-img"></td>
       <td style="text-align:center;padding:3px">${pizza.title}</td>
       <td style="text-align:center;padding:3px">£${pizza.price}</td>
       <td style="text-align:center;padding:3px">${pizza.amount}</td>`;

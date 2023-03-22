@@ -117,7 +117,7 @@ function addPizzaToCart() {
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size').textContent;
   const customPizza = {
     title: 'Custom pizza',
-    imgUrl: './images/custom-pizza.png',
+    imgUrl: 'https://i.ibb.co/PwtRr1M/custom-pizza.png',
     amount: 1,
     size: selectedSize,
   };
