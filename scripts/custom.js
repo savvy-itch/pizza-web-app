@@ -1,4 +1,3 @@
-import { sizes, ingredients } from "./ingredients.js";
 import {displayOrderQuantity} from './displayOrderQuantity.js';
 
 // maybe add events to enter key press

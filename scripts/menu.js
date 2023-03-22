@@ -1,17 +1,20 @@
-import menu from './data.js';
 import {displayOrderQuantity} from './displayOrderQuantity.js';
 
 const menuGrid = document.getElementById('menu-grid');
 let discountPercent = 10;
 let ordersArray = [];
+const url = 'https://raw.githubusercontent.com/spr0neInBlazer/pizza-web-app/main/menu.json';
 
-document.addEventListener('DOMContentLoaded', () => {
-  displayMenuItems(); 
-  displayOrderQuantity();
-});
+fetch(url)
+  .then(response => response.json())
+  .then(MENU => {
+    displayMenuItems(MENU); 
+    displayOrderQuantity();
+  })
+  .catch(error => console.error(error));
 
-function displayMenuItems() {
-  menu.map(item => {
+function displayMenuItems(MENU) {
+  MENU.map(item => {
     const singlePizza = document.createElement('div');
     singlePizza.className = 'single-pizza';
     let pizzaContent = `
@@ -42,7 +45,7 @@ function displayMenuItems() {
     menuGrid.addEventListener('click', e => {
       const sizeBtn = e.target.closest('.size-btn');
       if (sizeBtn) {
-        changeSize(sizeBtn);
+        changeSize(sizeBtn, MENU);
         const sizeBtns = [...sizeBtn.parentElement.children];
         sizeBtns.forEach(btn => {
           btn.classList.remove('active');
@@ -52,19 +55,19 @@ function displayMenuItems() {
     });
     const addBtn = singlePizza.querySelector('.add-btn');
     addBtn.addEventListener('click', (e) => {
-      addPizzaToCart(e);
+      addPizzaToCart(e, MENU);
       displayOrderQuantity();
     });
   });
 }
 
 // change price on size button click
-function changeSize(sizeBtn) {
+function changeSize(sizeBtn, MENU) {
   const currentSize = sizeBtn.innerText;
   const singlePizza = sizeBtn.parentElement.parentElement;
   const pizzaTitle = singlePizza.querySelector('.pizza-info-heading').innerText;
   // find object with the name of current pizza
-  const pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);
+  const pizzaFromDb = MENU.find(elem => elem.title === pizzaTitle);
   let newPrice = pizzaFromDb.price[currentSize.toLowerCase()];
   const priceElement = singlePizza.querySelector('.pizza-price');
   // display new price
@@ -96,11 +99,11 @@ function setDiscountPrice(price, percent) {
 }
 
 // add order to local storage
-function addPizzaToCart(e) {
+function addPizzaToCart(e, MENU) {
   const currentPizza = e.target.parentElement;
   const currentSize = currentPizza.querySelector('.active').textContent.toLowerCase();
   const pizzaTitle = currentPizza.querySelector('.pizza-info-heading').textContent;
-  const pizzaFromDb = menu.find(elem => elem.title === pizzaTitle);
+  const pizzaFromDb = MENU.find(elem => elem.title === pizzaTitle);
   const {title, imgUrl, price, isDiscount} = pizzaFromDb;
   const pizzaDataToStore = {title, imgUrl, isDiscount};
   pizzaDataToStore.price = isDiscount ? setDiscountPrice(price[currentSize], discountPercent) : price[currentSize];
@@ -128,6 +131,5 @@ function addPizzaToCart(e) {
     // set back the flag to false for the next iteration
     isMatchFound = false;
   }
-
   localStorage.setItem('pizzas', JSON.stringify(ordersArray));
 }
