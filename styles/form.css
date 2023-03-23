@@ -49,3 +49,12 @@ h2 {
   background-color: var(--background-color);
   color: var(--highlighted-color);
 }
+
+@media screen and (max-width: 420px) {
+  .confirm-div {
+    width: 95vw;
+  }
+  h2 {
+    margin-top: 1rem;
+  }
+}

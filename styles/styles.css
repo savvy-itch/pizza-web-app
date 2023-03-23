@@ -44,9 +44,6 @@ nav a,
   transition: .2s;
   cursor: pointer;
 }
-/* .nav-toggle:hover {
-  transform: rotate(90deg);
-} */
 .logo {
   height: 40px;
 }
@@ -81,7 +78,7 @@ nav a,
 .order-quantity {
   position: absolute;
   top: -13px;
-  right: -14px;
+  right: -10px;
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-color);
@@ -164,11 +161,12 @@ nav a,
 }
 @media screen and (max-width: 800px) {
   .nav-center {
-    padding: 1rem;
+    padding: .5rem;
   }
   .nav-header {
     display: grid;
     grid-template-columns: 6fr 1fr 1fr;
+    padding: .5rem;
   }
   .nav-logo {
     font-size: 1.2rem;
