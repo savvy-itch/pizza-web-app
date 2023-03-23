@@ -127,10 +127,12 @@ function removeItem(e) {
 
 function updateTotalCost() {
   let total = 0;
-  storedOrders.forEach(pizza => {
-    let pizzaPrice = pizza.price * pizza.amount;
-    total += pizzaPrice;
-  })
+  if (storedOrders.length !== 0 && storedOrders) {
+    storedOrders.forEach(pizza => {
+      let pizzaPrice = pizza.price * pizza.amount;
+      total += pizzaPrice;
+    })
+  }
   total = total.toFixed(2);
   totalCost.textContent = `£${total}`;
 }
