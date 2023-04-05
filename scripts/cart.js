@@ -58,7 +58,7 @@ function displayEmptyCartMsg() {
   emptyCartMsg.className = 'empty-cart';
   let msgContent = `
     <p>No items in your cart yet :(</p>
-    <img src="/images/empty pizza box.svg" alt="empty cart icon">
+    <img src="../images/empty pizza box.svg" alt="empty cart icon">
     <a href="./menu.html"><button>Go back shopping</button></a>`;
   emptyCartMsg.innerHTML = msgContent;
   cartDiv.appendChild(emptyCartMsg);
