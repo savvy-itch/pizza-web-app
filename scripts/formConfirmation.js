@@ -51,8 +51,8 @@ function checkNumberValidity() {
   // if input is not empty
   if (phoneInput.value) {
     phoneInput.style.border = '2px solid black';
-    // if input doesn't have forbidden symbols 
-    let result = !/[\D]/.test(phoneInput.value);
+    // check for a number of 12 digits strating with +380
+    let result = /^[\+]380\d{9}$/.test(phoneInput.value);
     result 
       ? phoneInput.style.border = '2px solid black' 
       : phoneInput.style.border = '2px solid red'; 
