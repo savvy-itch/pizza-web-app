@@ -4,6 +4,20 @@ const menuGrid = document.getElementById('menu-grid');
 let discountPercent = 10;
 let ordersArray = [];
 const url = 'https://raw.githubusercontent.com/spr0neInBlazer/pizza-web-app/main/menu.json';
+const numOfSkeletons = 4;
+
+for (let i = 0; i < numOfSkeletons; i++) {
+  const skeleton = document.createElement('div');
+  skeleton.className = 'skeleton';
+  let content = `
+    <div class="skeleton-img"></div>
+      <div class="skeleton-info">
+        <div class="skeleton-heading"></div>
+        <div class="skeleton-info-heading"></div>
+      </div>`
+  skeleton.innerHTML = content;
+  menuGrid.appendChild(skeleton);
+};
 
 fetch(url)
   .then(response => response.json())
@@ -14,6 +28,22 @@ fetch(url)
   .catch(error => console.error(error));
 
 function displayMenuItems(MENU) {
+  console.log(MENU)
+  menuGrid.innerHTML = '';
+  const createPizzaCard = document.createElement('div');
+  createPizzaCard.className = 'single-pizza';
+  let content = `
+    <img class="create-pizza-img" src="../images/create-pizza.webp" alt="create-pizza">
+      <div class="create-pizza-info">
+        <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
+        <p class="create-info-desc">Choose From Our Options Of Design 
+          And Make Your Own Pizza.</p>
+      </div>
+      <a class="create-btn-link" href="./custom.html">
+        <button class="create-btn btn">Create Now</button>
+      </a>`;
+  createPizzaCard.innerHTML = content;
+  menuGrid.appendChild(createPizzaCard);
   MENU.map(item => {
     const singlePizza = document.createElement('div');
     singlePizza.className = 'single-pizza';
@@ -23,7 +53,7 @@ function displayMenuItems(MENU) {
         <button class="size-btn active">M</button>
         <button class="size-btn">L</button>
       </div>
-      <img src=${item.imgUrl} alt="pizza">
+      <img src=${item.imgUrl} loading="lazy" alt="pizza">
       <div class="single-pizza-info">
         <p class="pizza-price">
         ${item.isDiscount

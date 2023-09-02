@@ -1,3 +1,13 @@
+@use "./mixins";
+@use "./variables";
+
+@mixin pulse-animation {
+  transition: background-color .2s;
+  animation-name: pulse;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
 body {
   background-color: hsl(0, 0%, 90%);
   background-image: url('https://i.ibb.co/8KBwcBV/pizza-background.png');
@@ -15,19 +25,80 @@ body {
   flex-wrap: wrap;
   margin: 0 auto;
 }
+.skeleton {
+  @include mixins.flex__align-center;
+  flex: 0 0 auto;
+  width: 22%;
+  height: 400px;
+  max-height: 400px;
+  max-width: 100%;
+  margin: 1.5rem 1.2rem;
+
+  flex-direction: column;
+  border-radius: 10px;
+  position: relative;
+  background-color: hsl(231, 14%, 84%);
+}
+.skeleton-img {
+  @include pulse-animation();
+  background-color: variables.$size-btn-color;
+  max-width: 150px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-top: 25%;
+}
+.skeleton-info {
+  @include mixins.flex__align-center;
+  @include mixins.col__center;
+  background-color: variables.$size-btn-color;
+  padding: 1rem .5rem calc(var(--button-offset) + .7rem) .5rem;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.skeleton-heading {
+  @include pulse-animation();
+  height: 26px;
+  margin: .2rem 0;
+  width: 40%;
+  background-color: hsl(231, 14%, 84%);
+  border-radius: 13px;
+}
+.skeleton-info-heading {
+  @include pulse-animation();
+  height: 20px;
+  margin: .4rem 0;
+  width: 70%;
+  background-color: hsl(231, 14%, 84%);
+  border-radius: 10px;
+}
+@keyframes pulse {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(.9);
+  }
+  100% {
+    filter: brightness(1);;
+  }
+}
+
 .single-pizza {
+  @include mixins.flex__align-center;
   flex: 0 0 auto;
   width: 22%;
   max-width: 100%;
   margin: 1.5rem 1.2rem;
 
-  display: flex;
   flex-direction: column;
   border-radius: 10px;
   position: relative;
-  align-items: center;
   justify-content: space-between;
-  background-color: white;
+  background-color: variables.$text-color;
 }
 .size-btn-container {
   display: flex;
@@ -39,17 +110,17 @@ body {
 .size-btn {
   background-color: transparent;
   border-radius: 25%;
-  border: 2px solid #969AB0;
-  color: #969AB0;
+  border: 2px solid variables.$size-btn-color;
+  color: variables.$size-btn-color;
   font-size: 1.1rem;
   width: 38px;
   height: 38px;
   cursor: pointer;
 }
 .size-btn.active {
-  border: 2px solid var(--background-color);
-  color: white;
-  background-color: #969AB0;
+  border: 2px solid variables.$bg-color;
+  color: variables.$text-color;
+  background-color: variables.$size-btn-color;
 }
 .single-pizza .create-pizza-img {
   max-width: 100%;
@@ -82,7 +153,7 @@ body {
 .pizza-info-desc {
   font-size: 1rem;
   font-weight: 300;
-  color: #969AB0;
+  color: variables.$size-btn-color;
 }
 .pizza-price {
   font-size: 1.3rem;
@@ -95,7 +166,7 @@ body {
 }
 .create-btn {
   background-color: var(--text-color);
-  color: var(--background-color);
+  color: variables.$bg-color;
   padding: 1rem 2rem;
   min-width: 140px;
   border-radius: 30px;
@@ -103,7 +174,7 @@ body {
   font-weight: 600;
 }
 .add-btn {
-  background-color: var(--highlighted-color);
+  background-color: variables.$highlight-color;
   color: var(--text-color);
   padding: 1rem 2rem;
   min-width: 140px;
@@ -117,15 +188,15 @@ body {
 .create-btn:focus,
 .add-btn:hover,
 .add-btn:focus {
-  background-color: var(--background-color);
-  color: var(--highlighted-color);
+  background-color: variables.$bg-color;
+  color: variables.$highlight-color;
 }
 
 /* ----- Discounts ----------- */
 .discount-tag {
   position: absolute;
   background-color: #FD5C2E;
-  color: white;
+  color: variables.$text-color;
   border-radius: 50%;
   padding: 12px;
   font-size: 1.1rem;
@@ -135,7 +206,7 @@ body {
 .menu-grid .discount-old-price {
   text-decoration: line-through;
   font-size: 1.1rem;
-  color: #969AB0;
+  color: variables.$size-btn-color;
   padding-right: .4rem;
 }
 
@@ -155,16 +226,16 @@ body {
 }
 .go-to-cart-btn:hover,
 .go-to-cart-btn:focus {
-  background-color: var(--background-color);
-  color: #FFAA2C; 
+  background-color: variables.$bg-color;
+  color: variables.$highlight-color; 
 }
-
 
 @media screen and (max-width: 1360px) {
   .container {
     max-width: 1200px;
   }
-  .single-pizza {
+  .single-pizza,
+  .skeleton {
     margin: 1.5rem 1rem;
   }
 }
@@ -173,7 +244,8 @@ body {
   .container {
     max-width: 1000px;
   }
-  .single-pizza {
+  .single-pizza,
+  .skeleton {
     width: 30%;
     margin: 1.5rem 1rem;
   }
@@ -182,7 +254,8 @@ body {
   .container {
     max-width: 880px;
   }
-  .single-pizza {
+  .single-pizza,
+  .skeleton {
     margin: 1.5rem .8rem;
   }
 }
@@ -191,7 +264,8 @@ body {
   .container {
     max-width: 550px;
   }
-  .single-pizza {
+  .single-pizza,
+  .skeleton {
     width: 45%;
   }
 }
@@ -199,7 +273,8 @@ body {
   .menu-grid {
     justify-content: center;
   }
-  .single-pizza {
+  .single-pizza,
+  .skeleton {
     width: 90%;
     margin: 2rem 0;
   }

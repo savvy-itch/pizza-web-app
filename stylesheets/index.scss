@@ -1,3 +1,6 @@
+@use "./variables";
+@use "./mixins";
+
 body {
   overflow: hidden;
 }
@@ -8,14 +11,13 @@ body {
   justify-content: space-between;
 }
 .img-wrapper {
+  @include mixins.col__center;
   flex-grow: 1;
-  flex-direction: column;
   display: flex;
   max-width: 50%;
-  justify-content: center;
 }
 .pizza-image {
-  background-image: url('https://i.ibb.co/2jV64R2/pizza2.png');
+  background-image: url('../images/pizza2.webp');
   flex-grow: 1;
   max-height: 70vh;
   min-width: 30%;
@@ -25,7 +27,7 @@ body {
 }
 
 .call-to-action {
-  color: var(--background-color);
+  color: variables.$bg-color;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -39,7 +41,7 @@ h2 {
   font-size: 3.7rem;
 }
 .highlighted-text {
-  color:var(--highlighted-color)
+  color: variables.$highlight-color;
 }
 .btn-container {
   margin: 2rem 0;
@@ -49,21 +51,19 @@ h2 {
   max-width: 400px;
 }
 .cta-btn {
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: variables.$bg-color;
+  color: variables.$text-color;
   padding: .8rem 1rem;
   font-size: 1.3rem;
   text-transform: uppercase;
   border-radius: 5px;
 }
 .cta-btn:focus {
-  background-color: var(--highlighted-color);
-  box-shadow: 0px 0px 10px 3px var(--highlighted-color); 
+  @include mixins.hover-effect;
 }
 @media (hover:hover) {
   .cta-btn:hover {
-    background-color: var(--highlighted-color);
-    box-shadow: 0px 0px 10px 3px var(--highlighted-color); 
+    @include mixins.hover-effect;
   }
 }
 
@@ -91,9 +91,8 @@ h2 {
 
 @media (max-width: 800px) {
   .container {
-    flex-direction: column;
+    @include mixins.col__center;
     align-items: center;
-    justify-content: center;
   }
   .img-wrapper {
     justify-content: center;

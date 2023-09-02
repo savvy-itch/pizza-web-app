@@ -1,21 +1,22 @@
+@use "./mixins";
+@use "./variables";
+
 body {
   background-image: url('https://i.ibb.co/8KBwcBV/pizza-background.png');
 }
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include mixins.flex__align-center;
+  @include mixins.col__center;
   min-height: 70vh;
 }
 h1 {
   font-size: 2.5rem;
   letter-spacing: 5px;
   margin: 1.5rem 0;
-  color: var(--background-color);
+  color: variables.$bg-color;
 }
 .cart {
-  background-color: white;
+  background-color: variables.$text-color;
   max-width: 500px;
   width: 80vw;
   border-radius: 15px;
@@ -23,10 +24,8 @@ h1 {
   box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
 }
 .empty-cart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include mixins.flex__align-center;
+  @include mixins.col__center;
 }
 .empty-cart p {
   font-size: 1.3rem;
@@ -38,8 +37,8 @@ h1 {
   height: auto;
 }
 .empty-cart button {
-  background-color: var(--highlighted-color);
-  color: var(--text-color);
+  background-color: variables.$highlight-color;
+  color: variables.$text-color;
   padding: .8rem 1rem;
   font-size: 1.3rem;
   text-transform: uppercase;
@@ -50,7 +49,7 @@ h1 {
 }
 .empty-cart button:hover,
 .empty-cart button:focus {
-  box-shadow: 0px 0px 12px 5px rgba(255,170,44,0.8); 
+  box-shadow: 0px 0px 12px 5px rgba(255, 170, 44, 0.8); 
 }
 .order {
   display: grid;
@@ -66,18 +65,17 @@ h1 {
 .order-info {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   padding-left: 1rem;
 }
 .order-title {
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--background-color);
+  color: variables.$bg-color;
 }
 .order-cost {
   font-size: 1.1rem;
   font-weight: 400;
-  color: var(--background-color);
+  color: variables.$bg-color;
 }
 .remove-btn {
   cursor: pointer;
@@ -85,7 +83,7 @@ h1 {
   width: fit-content;
   border: none;
   margin: .5rem 0;
-  color: var(--background-color);
+  color: variables.$bg-color;
   font-size: 1rem;
   letter-spacing: 3px;
   font-weight: 400;
@@ -95,42 +93,34 @@ h1 {
   color: lightcoral;
 }
 .amount-div {
-  display: flex;
+  @include mixins.flex__align-center;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  /* justify-self: center; */
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--background-color);
-  /* width: 90px; */
+  color: variables.$bg-color;
 }
 .amount-div button {
   font-size: 1.3rem;
   font-weight: 500;
-  color: var(--background-color);
+  color: variables.$bg-color;
   background-color: transparent;
-  /* border: 1px solid #969AB0;
-  width: 28px;
-  height: 28px;
-  border-radius: 2px; */
   border: none;
   cursor: pointer;
   transition: .2s;
 }
 .amount-div button:hover {
-  color: var(--highlighted-color);
+  color: variables.$highlight-color;
 }
 .line {
   width: 80%;
   height: 1px;
-  background-color: #969AB0;
+  background-color: variables.$size-btn-color;
   margin: 0 auto;
 }
 .total-cost {
-  display: flex;
+  @include mixins.flex__align-center;
   justify-content: space-between;
-  align-items: center;
   max-width: 500px;
   width: 80vw;
   padding: 1rem;
@@ -139,22 +129,20 @@ h1 {
 .total-cost p {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--background-color);
+  color: variables.$bg-color;
   text-transform: uppercase;
 }
 .confirm-div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  @include mixins.flex__align-center;
+  @include mixins.col__center;
   margin-top: 2rem;
 }
 .confirm-div button {
   font-size: 1.2rem;
   padding: .7rem;
   font-weight: 600;
-  background-color: var(--highlighted-color);
-  color: white;
+  background-color: variables.$highlight-color;
+  color: variables.$text-color;
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -163,6 +151,6 @@ h1 {
 }
 .confirm-div button:hover,
 .confirm-div button:focus {
-  background-color: var(--background-color);
-  color: var(--highlighted-color);
+  background-color: variables.$bg-color;
+  color: variables.$highlight-color;
 }

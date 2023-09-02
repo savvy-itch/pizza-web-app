@@ -1,0 +1,217 @@
+@use "./mixins";
+@use "./variables";
+
+body {
+  --inactive-btn: hsl(228, 13%, 46%);
+
+  max-height: 100vh;
+  background-image: url('https://i.ibb.co/8KBwcBV/pizza-background.png');
+}
+.create-section {
+  @include mixins.flex__align-center;
+  justify-content: center;
+  min-height: 90vh;
+}
+.container {
+  max-width: 1300px;
+  margin: 2rem auto 0;
+}
+h1 {
+  font-size: 2rem;
+  margin: 1rem 0;
+}
+.create-pizza-desc {
+  font-size: 1.2rem;
+  color: variables.$bg-color;
+}
+.pizza-constructor-container {
+  display: flex;
+  justify-content: space-around;
+}
+.pizza-constructor-image {
+  width: 30vw;
+  height: 30vw;
+  position: relative;
+}
+.pizza-constructor-image .pizza-base-image {
+  width: 100%;
+  height: auto;
+  position: absolute;
+}
+.pizza-settings-container {
+  @include mixins.col__center;
+  display: flex;
+  align-items: flex-start;
+  max-width: 45%;
+}
+.pizza-settings-container h3 {
+  align-self: flex-start;
+}
+.pizza-topping-image {
+  z-index: 1;
+  position: absolute;
+  left: 7.5%;
+  top: 2%;
+  width: 85%;
+  height: auto;
+}
+.topping-btn-container,
+.size-btn-container {
+  @include mixins.flex__align-center;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 90%;
+  margin: 1rem 0;
+}
+.size-btn {
+  @include mixins.flex__align-center;
+  flex-direction: column;
+  text-transform: capitalize;
+}
+.topping-btn,
+.size-btn {
+  font-family: 'Signika', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #F5F3EF;
+  color: var(--inactive-btn);
+  padding: 15px 5px;
+  margin: .5rem;
+  min-width: 100px;
+  border-radius: 10px;
+  border: 2px solid var(--inactive-btn);
+  cursor: pointer;
+}
+.topping-btn-container .active,
+.size-btn-container .active {
+  color: #F6752C;
+  border: 2px solid variables.$highlight-color;
+  box-shadow: 0px 3px 10px rgba(26, 26, 33, 0.1);
+}
+
+.cart-btn-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.cart-btn-container a {
+  text-decoration: none;
+}
+.add-to-cart-btn {
+  @include mixins.flex__align-center;
+  background-color: #F6752C;
+  color: variables.$text-color;
+  padding: .8rem 1rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-radius: 25px;
+  width: 350px;
+  justify-content: space-between;
+}
+.add-to-cart-btn:hover,
+.add-to-cart-btn:focus {
+  background-color: variables.$bg-color;
+  color: variables.$highlight-color; 
+}
+.add-to-cart-btn:disabled {
+  cursor: not-allowed;
+  background-color: var(--inactive-btn);
+  color: variables.$text-color;
+}
+.total-price {
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 1360px) {
+  .container {
+    max-width: 1250px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 1100px;
+    margin: 2rem 1.5rem; 
+  }
+  h1 {
+    margin: .6rem 0;
+  }
+  .pizza-settings-container {
+    max-width: 50%;
+  }
+  .topping-btn-container,
+  .size-btn-container {
+    max-width: 100%;
+    margin: .7rem 0;
+  }
+  .topping-btn,
+  .size-btn {
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 5px;
+    margin: .5rem;
+    min-width: 90px;
+  }
+  .size-btn span {
+    font-weight: 300;
+  }
+  .cart-btn-container {
+    margin: 1rem 0;
+  }
+  .add-to-cart-btn {
+    padding: .6rem 1rem;
+    font-size: 1.3rem;
+    width: 300px;
+  }
+  .pizza-constructor-container {
+    margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  body {
+    overflow: auto;
+  }
+  h1 {
+    font-size: 1.7rem;
+  }
+  .container {
+    max-width: 920px;
+    margin: 1.1rem 1.5rem;
+  }
+}
+@media screen and (max-width: 970px) {
+  .pizza-constructor-container {
+    margin: 2.5rem 0;
+  }
+}
+@media screen and (max-width: 800px) {
+  .pizza-constructor-container {
+    margin: 1.5rem 0;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1, .create-pizza-desc {
+    text-align: center;
+  }
+  .pizza-constructor-image {
+    width: 50vw;
+    height: 50vw;
+  }
+  .pizza-settings-container {
+    max-width: 90%;
+  }
+  .topping-btn-container,
+  .size-btn-container {
+    margin: 1.1rem 0 1.3rem 0;
+  }
+  .topping-btn {
+    padding: 13px 5px;
+  }
+  .add-to-cart-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    width: 300px;
+  }
+  .total-price {
+    font-size: 1rem;
+  }
+}

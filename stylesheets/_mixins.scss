@@ -1,0 +1,14 @@
+@use "./variables";
+
+@mixin hover-effect() {
+  background-color: variables.$highlight-color;
+  box-shadow: 0px 0px 10px 3px variables.$highlight-color; 
+}
+@mixin flex__align-center {
+  display: flex;
+  align-items: center;
+}
+@mixin col__center {
+  flex-direction: column;
+  justify-content: center;
+}
