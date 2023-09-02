@@ -6,6 +6,7 @@ let ordersArray = [];
 const url = 'https://raw.githubusercontent.com/spr0neInBlazer/pizza-web-app/main/menu.json';
 const numOfSkeletons = 4;
 
+// add skeletons before data is fetched
 for (let i = 0; i < numOfSkeletons; i++) {
   const skeleton = document.createElement('div');
   skeleton.className = 'skeleton';
@@ -28,7 +29,6 @@ fetch(url)
   .catch(error => console.error(error));
 
 function displayMenuItems(MENU) {
-  console.log(MENU)
   menuGrid.innerHTML = '';
   const createPizzaCard = document.createElement('div');
   createPizzaCard.className = 'single-pizza';

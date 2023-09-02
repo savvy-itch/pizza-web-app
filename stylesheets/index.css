@@ -112,6 +112,9 @@ h2 {
     align-items: center;
     max-width: 80%;
   }
+  .pizza-image {
+    background-image: url("../images/pizza2_300x300.webp");
+  }
 }
 @media screen and (max-width: 480px) {
   h2 {
