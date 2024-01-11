@@ -101,9 +101,9 @@ function getTotalCost() {
 
 function sendEmail() {
   Email.send({
-    SecureToken : "ab2816f0-699d-4fbb-a5da-7b59306337fb",
+    SecureToken : "",
     To : `${emailInput.value}`,
-    From : "pizzaoclock69@gmail.com",
+    From : "",
     Subject : "Order Confirmation",
     Body : `
       <html>

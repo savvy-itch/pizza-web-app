@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu</title>
+  <link rel="stylesheet" href="../stylesheets/styles.css">
+  <link rel="stylesheet" href="../stylesheets/menu.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-center">
+        <div class="nav-header">
+          <div class="nav-logo">
+            <img class="logo" src="https://i.ibb.co/5n7tb1h/logo.png" alt="pizza-logo">
+            Pizza O'Clock
+          </div>
+          <a class="cart-link-sm" href="./cart.html">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <div class="order-quantity"></div>
+          </a>
+          <button class="nav-toggle">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+        <!-- links -->
+        <ul class="links">
+          <li>
+            <a href="../index.html">
+              <i class="fa-solid fa-house"></i>
+              home
+            </a>
+          </li>
+          <li>
+            <a href="./menu.html">
+              <i class="fa-solid fa-book-open"></i>  
+              menu
+            </a>
+          </li>
+          <li>
+            <a href="./contact.html">
+              <i class="fa-solid fa-address-card"></i>
+              contact
+            </a>
+          </li>
+        </ul>
+        <a class="cart-link" href="./cart.html">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <div class="order-quantity"></div>
+        </a>
+      </div>
+    </nav>
+  </header>
+  
+  <main>
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Filters</h2>
+        <button class="close-btn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <form id="filters-form">
+        <!-- ingredients, price, discount -->
+        <fieldset>
+          <legend>Price Range</legend>
+          <div class="range_container">
+            <div class="sliders_control">
+              <input id="min-slider" class="min-slider" type="range" value="0" min="0" max="100"/>
+              <input id="max-slider" type="range" value="100" min="0" max="100"/>
+            </div>
+            <div class="form_control">
+              <div class="form_control_container">
+                <label for="min-input">Min</label>
+                <input class="form_control_container__time__input" name="min-price" type="number" id="min-input" value="0" min="0" max="100"/>
+              </div>
+              <p>-</p>
+              <div class="form_control_container">
+                <label for="max-input">Max</label>
+                <input class="form_control_container__time__input" name="max-price" type="number" id="max-input" value="100" min="0" max="100"/>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Discount</legend>
+          <input type="checkbox" id="discount" name="discount" value=">0">
+          <label for="discount">On Discount</label>
+        </fieldset>
+        <fieldset id="ingredient-filters">
+          <legend>Ingredients</legend>
+        </fieldset>
+        <input type="submit" value="Update Results">
+      </form>
+    </aside>
+    <div class="container">
+      <div class="sort-wrapper">
+        <button class="sidebar-toggle">Filters</button>
+        <div>
+          <label for="sort">Sort <i class="fa-solid fa-arrow-up-short-wide"></i></label>
+          <select name="sort" id="sort">
+            <option value="title">By name</option>
+            <option value="price">From cheap to expensive</option>
+            <option value="-price">From expensive to cheap</option>
+          </select>
+        </div>
+      </div>
+      <div id="menu-grid" class="menu-grid">
+      </div>
+      <div id="pagination-wrapper" class="pagination-wrapper">
+      </div>
+    </div>
+    <div class="cart-btn-container">
+      <a href="./cart.html">
+        <button class="go-to-cart-btn btn">Go to Cart</button>
+      </a>
+    </div>
+  </main>
+
+  <script src="../scripts/nav.js"></script>
+  <script src="../scripts/menu.js" type="module"></script>
+  <script src="../scripts/priceFilter.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+[
+  {
+    "title": "Cheese Lovers",
+    "ingredients": [
+      "6598f6b425f82811512c6ff9"
+    ],
+    "imgUrl": "../images/menu-pizza1.webp",
+    "price": {
+      "s": 10.25,
+      "m": 12.30,
+      "l": 14.75
+    },
+    "discount": 0
+  },
+  {
+    "title": "Bacon Delight",
+    "ingredients": [
+      "6598f6b425f82811512c6ffa"
+    ],
+    "imgUrl": "../images/menu-pizza2.webp",
+    "price": {
+      "s": 12.25,
+      "m": 14.00,
+      "l": 15.82
+    },
+    "discount": 10
+  },
+  {
+    "title": "Meaty Marvel",
+    "ingredients": [
+      "6598f6b425f82811512c6ffd",
+      "6598f6b425f82811512c6ffc"
+    ],
+    "imgUrl": "../images/menu-pizza3.webp",
+    "price": {
+      "s": 9.00,
+      "m": 11.60,
+      "l": 13.45
+    },
+    "discount": 0
+  },
+  {
+    "title": "Olive Paradise",
+    "ingredients": [
+      "6598f6b425f82811512c6ffe"
+    ],
+    "imgUrl": "../images/menu-pizza4.webp",
+    "price": {
+      "s": 10.60,
+      "m": 12.52,
+      "l": 14.63
+    },
+    "discount": 0
+  },
+  {
+    "title": "Pepperoni Feast",
+    "ingredients": [
+      "6598f6b425f82811512c6fff",
+      "6598f6b425f82811512c6ff9",
+      "6598f6b425f82811512c6ffb"
+    ],
+    "imgUrl": "../images/menu-pizza5.webp",
+    "price": {
+      "s": 11.40,
+      "m": 13.56,
+      "l": 16.90
+    },
+    "discount": 0
+  },
+  {
+    "title": "Bacon & Olives Combo",
+    "ingredients": [
+      "6598f6b425f82811512c6ffa",
+      "6598f6b425f82811512c6ffe"
+    ],
+    "imgUrl": "../images/menu-pizza6.webp",
+    "price": {
+      "s": 11.45,
+      "m": 13.15,
+      "l": 14.48
+    },
+    "discount": 0
+  },
+  {
+    "title": "Meatball Madness",
+    "ingredients": [
+      "6598f6b425f82811512c6ffd",
+      "6598f6b425f82811512c6ff9",
+      "6598f6b425f82811512c6ffb"
+    ],
+    "imgUrl": "../images/menu-pizza7.webp",
+    "price": {
+      "s": 12.50,
+      "m": 14.10,
+      "l": 16.12
+    },
+    "discount": 0
+  },
+  {
+    "title": "Cheese & Peppers Fiesta",
+    "ingredients": [
+      "6598f6b425f82811512c6ff9",
+      "6598f6b425f82811512c6ffb"
+    ],
+    "imgUrl": "../images/menu-pizza8.webp",
+    "price": {
+      "s": 9.75,
+      "m": 11.90,
+      "l": 14.25
+    },
+    "discount": 5
+  },
+  {
+    "title": "Bacon & Pepperoni Delight",
+    "ingredients": [
+      "6598f6b425f82811512c6ffa",
+      "6598f6b425f82811512c6fff"
+    ],
+    "imgUrl": "../images/menu-pizza9.webp",
+    "price": {
+      "s": 11.50,
+      "m": 13.75,
+      "l": 16.20
+    },
+    "discount": 15
+  },
+  {
+    "title": "Mega Meat Feast",
+    "ingredients": [
+      "6598f6b425f82811512c6ffd",
+      "6598f6b425f82811512c6ffa",
+      "6598f6b425f82811512c6fff",
+      "6598f6b425f82811512c6ff9"
+    ],
+    "imgUrl": "../images/menu-pizza10.webp",
+    "price": {
+      "s": 12.75,
+      "m": 14.90,
+      "l": 17.25
+    },
+    "discount": 0
+  }
+]

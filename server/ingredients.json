@@ -1,0 +1,37 @@
+[
+  {
+    "name":"Cheese",
+    "price":"2.30",
+    "imgUrl":"https://i.ibb.co/HFkc3p9/cheese.png"
+  },
+  {
+    "name":"Bacon",
+    "price":"3.00",
+    "imgUrl":"https://i.ibb.co/5FmbKNY/bacon.png"
+  },
+  {
+    "name":"Meatballs",
+    "price":"2.82",
+    "imgUrl":"https://i.ibb.co/B2ymVDk/meatballs.png"
+  },
+  {
+    "name":"Olives",
+    "price":"2.53",
+    "imgUrl":"https://i.ibb.co/WpppqxX/olives.png"
+  },
+  {
+    "name":"Parsley",
+    "price":"1.74",
+    "imgUrl":"https://i.ibb.co/47Wt8xy/parsley.png"
+  },
+  {
+    "name":"Pepperoni",
+    "price":"3.35",
+    "imgUrl":"https://i.ibb.co/wSRTqK0/pepperoni.png"
+  },
+  {
+    "name":"Peppers",
+    "price":"2.05",
+    "imgUrl":"https://i.ibb.co/mFSCXMm/peppers.png"
+  }
+]
