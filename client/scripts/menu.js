@@ -1,45 +1,43 @@
 import {displayOrderQuantity} from './displayOrderQuantity.js';
+import {pizzasUrl, ingredientsUrl} from './globals.js';
 
-// + sorting
-// + pagination
-// + filtering
-  // + filter price in range
-  // + display filters menu on the fe
-  // + update products of filters submission 
-// + add filters to every query
-// hide sender email and secure token from the code
+// + display custom message when no results were found
 // split code into separate files
 // error page
-// collapse sidebar when user clicks outside of it
+// + collapse sidebar when user clicks outside of it
+// hide sender email and secure token from the code
+// styling
 
 const menuGrid = document.getElementById('menu-grid');
 const sortInput = document.getElementById('sort');
 const paginationWrapper = document.getElementById('pagination-wrapper');
 const filtersForm = document.getElementById('filters-form');
 const ingredientFiltersFieldset = document.getElementById('ingredient-filters');
-let discountPercent = 10;
-let ordersArray = [];
-const url =  'http://localhost:3000/api/pizzas';
-const ingredientsUrl = 'http://localhost:3000/api/ingredients';
+const sidebar = document.querySelector(".sidebar");
+
 const numOfSkeletons = 4;
+let ordersArray = [];
 let ingredientsList = [];
-let appliedFilters = ''
+let appliedFilters = '';
 
 // add skeletons before data is fetched
-for (let i = 0; i < numOfSkeletons; i++) {
-  const skeleton = document.createElement('div');
-  skeleton.className = 'skeleton';
-  let content = `
-    <div class="skeleton-img"></div>
+function displaySkeletons() {
+  for (let i = 0; i < numOfSkeletons; i++) {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'skeleton';
+    let content = `
+      <div class="skeleton-img"></div>
       <div class="skeleton-info">
         <div class="skeleton-heading"></div>
         <div class="skeleton-info-heading"></div>
       </div>`
-  skeleton.innerHTML = content;
-  menuGrid.appendChild(skeleton);
-};
+    skeleton.innerHTML = content;
+    menuGrid.appendChild(skeleton);
+  };
+}
 
-fetch(url)
+displaySkeletons();
+fetch(pizzasUrl)
   .then(response => response.json())
   .then(MENU => {
     displayMenuItems(MENU.pizzas);
@@ -66,51 +64,61 @@ export function displayMenuItems(MENU) {
       </a>`;
   createPizzaCard.innerHTML = content;
   menuGrid.appendChild(createPizzaCard);
-  MENU.map(item => {
-    const singlePizza = document.createElement('div');
-    singlePizza.className = 'single-pizza';
-    let pizzaContent = `
-      <div class="size-btn-container">
-        <button class="size-btn">S</button>
-        <button class="size-btn active">M</button>
-        <button class="size-btn">L</button>
-      </div>
-      <img src=${item.imgUrl} loading="lazy" alt="pizza">
-      <div class="single-pizza-info">
-        <p class="pizza-price">
-        ${item.discount !== 0
-          ? `<span class="discount-old-price">£${item.price.m}</span>
-            £${setDiscountPrice(item.price.m, item.discount)}</p>`
-          : `£${item.price.m}`
-        }
-        </p>
-        <h3 class="pizza-info-heading">${item.title}</h3>
-        <p class="pizza-info-desc">${item.ingredients.map(i => ` ${i.name}`)}</p>
-      </div>
-      <button class="add-btn btn">Add</button>`;
-    singlePizza.innerHTML = pizzaContent;
-    menuGrid.appendChild(singlePizza);
-    if (item.discount !== 0) {
-      setDiscountTag(singlePizza, item.discount);
-    }
 
-    menuGrid.addEventListener('click', e => {
-      const sizeBtn = e.target.closest('.size-btn');
-      if (sizeBtn) {
-        changeSize(sizeBtn, MENU);
-        const sizeBtns = [...sizeBtn.parentElement.children];
-        sizeBtns.forEach(btn => {
-          btn.classList.remove('active');
-        })
-        sizeBtn.classList.add('active');
+  // no results
+  if (MENU.length === 0) {
+    const noResultsCard = document.createElement('div');
+    noResultsCard.className = 'no-results';
+    let pizzaContent = `<h3>Sorry, no results :(</h3>`;
+    noResultsCard.innerHTML = pizzaContent;
+    menuGrid.appendChild(noResultsCard);
+  } else {
+    MENU.map(item => {
+      const singlePizza = document.createElement('div');
+      singlePizza.className = 'single-pizza';
+      let pizzaContent = `
+        <div class="size-btn-container">
+          <button class="size-btn">S</button>
+          <button class="size-btn active">M</button>
+          <button class="size-btn">L</button>
+        </div>
+        <img src=${item.imgUrl} loading="lazy" alt="pizza">
+        <div class="single-pizza-info">
+          <p class="pizza-price">
+          ${item.discount !== 0
+            ? `<span class="discount-old-price">£${item.price.m}</span>
+              £${setDiscountPrice(item.price.m, item.discount)}</p>`
+            : `£${item.price.m}`
+          }
+          </p>
+          <h3 class="pizza-info-heading">${item.title}</h3>
+          <p class="pizza-info-desc">${item.ingredients.map(i => ` ${i.name}`)}</p>
+        </div>
+        <button class="add-btn btn">Add</button>`;
+      singlePizza.innerHTML = pizzaContent;
+      menuGrid.appendChild(singlePizza);
+      if (item.discount !== 0) {
+        setDiscountTag(singlePizza, item.discount);
       }
+  
+      menuGrid.addEventListener('click', e => {
+        const sizeBtn = e.target.closest('.size-btn');
+        if (sizeBtn) {
+          changeSize(sizeBtn, MENU);
+          const sizeBtns = [...sizeBtn.parentElement.children];
+          sizeBtns.forEach(btn => {
+            btn.classList.remove('active');
+          })
+          sizeBtn.classList.add('active');
+        }
+      });
+      const addBtn = singlePizza.querySelector('.add-btn');
+      addBtn.addEventListener('click', (e) => {
+        addPizzaToCart(e, MENU);
+        displayOrderQuantity();
+      });
     });
-    const addBtn = singlePizza.querySelector('.add-btn');
-    addBtn.addEventListener('click', (e) => {
-      addPizzaToCart(e, MENU);
-      displayOrderQuantity();
-    });
-  });
+  }
 }
 
 // change price on size button click
@@ -146,7 +154,7 @@ function setDiscountTag(item, percent) {
 
 // calculate price with discount
 function setDiscountPrice(price, percent) {
-  price = (price - (price * percent/100)).toFixed(2);
+  price = Number((price - (price * percent/100)).toFixed(2));
   return price;
 }
 
@@ -158,7 +166,7 @@ function addPizzaToCart(e, MENU) {
   const pizzaFromDb = MENU.find(elem => elem.title === pizzaTitle);
   const {title, imgUrl, price, discount} = pizzaFromDb;
   const pizzaDataToStore = {title, imgUrl, discount};
-  pizzaDataToStore.price = discount !== 0 ? setDiscountPrice(price[currentSize], discountPercent) : price[currentSize];
+  pizzaDataToStore.price = discount !== 0 ? setDiscountPrice(price[currentSize], discount) : Number(price[currentSize]);
   pizzaDataToStore.size = currentSize;
   pizzaDataToStore.amount = 1;
   const orders = localStorage.getItem('pizzas') ?? '[]';
@@ -187,7 +195,8 @@ function addPizzaToCart(e, MENU) {
 }
 
 sortInput.addEventListener('change', () => {
-  fetch(`${url}?${appliedFilters}&sort=${sortInput.value}`)
+  displaySkeletons();
+  fetch(`${pizzasUrl}?${appliedFilters}&sort=${sortInput.value}`)
   .then(response => response.json())
   .then(menu => {
     displayMenuItems(menu.pizzas); 
@@ -196,6 +205,7 @@ sortInput.addEventListener('change', () => {
 });
 
 function fetchData(url) {
+  displaySkeletons();
   return fetch(url)
   .then(response => response.json())
   .then(MENU => {
@@ -212,7 +222,7 @@ function listPageBtns(res) {
   const prevPage = document.createElement('button');
   prevPage.disabled = res.page === 1;
   prevPage.addEventListener('click', () => {
-    fetchData(`${url}?${appliedFilters}&page=${res.page - 1}`);
+    fetchData(`${pizzasUrl}?${appliedFilters}&page=${res.page - 1}`);
   });
   prevPage.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
   paginationWrapper.appendChild(prevPage);
@@ -227,24 +237,11 @@ function listPageBtns(res) {
   const nextPage = document.createElement('button');
   nextPage.disabled = !hasMore;
   nextPage.addEventListener('click', () => {
-    fetchData(`${url}?${appliedFilters}&page=${res.page + 1}`);
+    fetchData(`${pizzasUrl}?${appliedFilters}&page=${res.page + 1}`);
   });
   nextPage.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
   paginationWrapper.appendChild(nextPage);
 }
-
-// Sidebar toggle
-const toggleBtn = document.querySelector('.sidebar-toggle');
-const sidebar = document.querySelector(".sidebar");
-const closeBtn = document.querySelector('.close-btn');
-
-toggleBtn.addEventListener('click', function() {
-  sidebar.classList.toggle('show-sidebar');
-});
-
-closeBtn.addEventListener('click', function() {
-  sidebar.classList.remove('show-sidebar');
-})
 
 // Filters
 function fetchIngredients() {
@@ -271,6 +268,7 @@ function displayIngredients() {
 filtersForm.addEventListener('submit', (e) =>handleFormSubmission(e));
 
 function handleFormSubmission(e) {
+  displaySkeletons();
   e.preventDefault();
   const formData = new FormData(filtersForm);
   let numericFilters = 'numericFilters=';
@@ -289,7 +287,7 @@ function handleFormSubmission(e) {
     numericFilters += `${(minPrice > 0 || maxPrice < 100) ? ',discount' : 'discount'}` + discountFilter;
   }
   appliedFilters = `${numericFilters}${ingredientFilters && `&ingredients=${ingredientFilters.join(',')}`}`;
-  const urlWithFilters = `${url}?${appliedFilters}&sort=${sortInput.value}`;
+  const urlWithFilters = `${pizzasUrl}?${appliedFilters}&sort=${sortInput.value}`;
   
   fetch(urlWithFilters)
     .then(response => response.json())

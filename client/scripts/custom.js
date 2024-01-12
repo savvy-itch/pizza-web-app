@@ -1,22 +1,41 @@
 import {displayOrderQuantity} from './displayOrderQuantity.js';
+import {ingredientsUrl} from './globals.js';
 
-// maybe add events to enter key press
+// + load all ingredients
+// + set up z-indexes manually
 
-const url = 'https://raw.githubusercontent.com/spr0neInBlazer/pizza-web-app/main/ingredients.json';
 const sizeBtnDiv = document.querySelector('.size-btn-container');
 const toppingBtnDiv = document.querySelector('.topping-btn-container');
 const pizzaConstructorDiv = document.querySelector('.pizza-constructor-image');
 const addBtn = document.getElementById('add-btn');
 const totalPrice = document.querySelector('.total-price');
+const descriptionPara = document.getElementById('create-pizza-desc');
+const sizesList = [
+  {size:"s", price: 7.25},
+  {size:"m", price: 9.25},
+  {size:"l", price: 11.25}
+];
+const toppingsZIndex = [
+  { id: '6598f6b425f82811512c6ff9', zIndex: 1},
+  { id: '6598f6b425f82811512c6ffa', zIndex: 3},
+  { id: '6598f6b425f82811512c6ffd', zIndex: 100},
+  { id: '6598f6b425f82811512c6ffe', zIndex: 2},
+  { id: '6598f6b425f82811512c6fff', zIndex: 4},
+  { id: '6598f6b425f82811512c6ffc', zIndex: 5},
+  { id: '6598f6b425f82811512c6ffb', zIndex: 3},
+]
+let fetchedIngredients = [];
 let ordersArray = [];
 
-fetch(url)
+fetch(ingredientsUrl)
   .then(response => response.json())
-  .then(INGREDIENTS => {
-    displaySizes(INGREDIENTS);
-    displayIngredients(INGREDIENTS);
-    updateTotalCost(INGREDIENTS);
+  .then(ingredients => {
+    fetchedIngredients = ingredients.ingredients;
+    displaySizes();
+    displayIngredients(ingredients.ingredients);
+    updateTotalCost(ingredients.ingredients);
     displayOrderQuantity();
+    populateDescription();
 });
 
 addBtn.addEventListener('click', () => {
@@ -24,9 +43,8 @@ addBtn.addEventListener('click', () => {
   displayOrderQuantity();
 });
 
-
-function displaySizes(INGREDIENTS) {
-  INGREDIENTS['sizes'].map(size => {
+function displaySizes() {
+  sizesList.map(size => {
     const sizeBtn = document.createElement('button');
     sizeBtn.className = 'size-btn';
     sizeBtn.innerHTML = `<span class="pizza-size">${size.size}</span><span>£${size.price}</span>`;
@@ -39,50 +57,49 @@ function displaySizes(INGREDIENTS) {
 
   const sizeBtns = [...document.querySelectorAll('.size-btn')];
   sizeBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    btn.addEventListener('click', () => {
       sizeBtns.forEach(btn => {
         btn.classList.remove('active');
       })
       btn.classList.add('active');
-      updateTotalCost(INGREDIENTS);
+      updateTotalCost(fetchedIngredients);
     });
   });
 }
 
-function displayIngredients(INGREDIENTS) {
-  INGREDIENTS["ingredients"].map(ingredient => {
+function displayIngredients(ingredients) {
+  ingredients.map(ingredient => {
     const ingredientBtn = document.createElement('button');
     ingredientBtn.className = 'topping-btn';
-    ingredientBtn.textContent = ingredient.topping;
+    ingredientBtn.textContent = ingredient.name;
     toppingBtnDiv.appendChild(ingredientBtn);
     ingredientBtn.addEventListener('click', (e) => {
       ingredientBtn.classList.toggle('active');
-      addTopping(e, INGREDIENTS);
-      updateTotalCost(INGREDIENTS);
+      toggleTopping(e.target, ingredients);
+      updateTotalCost(ingredients);
     })
   });
 }
 
 // add topping image to the pizza
-function addTopping(e, INGREDIENTS) {
-  const currentTopping = e.target;
-  const toppingFromDb = INGREDIENTS["ingredients"].find(el => el.topping === currentTopping.textContent);
+function toggleTopping(currentTopping, ingredients) {
+  const toppingFromDb = ingredients.find(el => el.name === currentTopping.textContent);
 
   // add topping image
   if (currentTopping.classList.contains('active')) {
     const toppingImg = document.createElement('img');
     toppingImg.src = toppingFromDb.imgUrl;
-    toppingImg.alt = toppingFromDb.topping;
+    toppingImg.alt = toppingFromDb.name;
     toppingImg.className = 'pizza-topping-image';
-    toppingImg.id = toppingFromDb.id;
-    toppingImg.style.zIndex = toppingFromDb.zIndex;
+    toppingImg.id = toppingFromDb._id;
+    toppingImg.style.zIndex = toppingsZIndex.find(item => item.id === toppingImg.id).zIndex;
     pizzaConstructorDiv.appendChild(toppingImg);
   } else {
     // remove topping image
     const displayedToppings = document.querySelectorAll('.pizza-topping-image');
 
     for (let img of displayedToppings) {
-      if (img.id === toppingFromDb.id) {
+      if (img.id === toppingFromDb._id) {
         pizzaConstructorDiv.removeChild(img);
       }
     }
@@ -90,10 +107,10 @@ function addTopping(e, INGREDIENTS) {
 }
 
 let total = 0;
-function updateTotalCost(INGREDIENTS) {
+function updateTotalCost(ingredients) {
   // add pizza size price
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size');
-  const sizeFromDb = INGREDIENTS["sizes"].find(el => el.size === selectedSize.textContent);
+  const sizeFromDb = sizesList.find(el => el.size === selectedSize.textContent);
   total = Number(sizeFromDb.price);
 
   // add toppings price
@@ -105,7 +122,7 @@ function updateTotalCost(INGREDIENTS) {
     addBtn.removeAttribute("disabled");
     let toppingsTotal = 0;
     selectedToppings.forEach(btn => {
-      let toppingFromDb = INGREDIENTS["ingredients"].find(el => el.topping === btn.textContent);
+      let toppingFromDb = ingredients.find(el => el.name === btn.textContent);
       toppingsTotal += parseFloat(toppingFromDb.price);
     });
     total += toppingsTotal;
@@ -125,7 +142,7 @@ function addPizzaToCart() {
     amount: 1,
     size: selectedSize,
   };
-  customPizza.price = total;
+  customPizza.price = Number(total);
 
   let isMatchFound = false;
   // increase amount of repeated pizzas
@@ -150,4 +167,8 @@ function addPizzaToCart() {
   }
   // storedOrders.push(customPizza);
   localStorage.setItem('pizzas', JSON.stringify(ordersArray));
+}
+
+function populateDescription() {
+  descriptionPara.textContent = `Create your own pizza by choosing its size and toppings! Select from three sizes and over ${fetchedIngredients.length} individual types of toppings.`
 }

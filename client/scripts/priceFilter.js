@@ -66,7 +66,6 @@ function getParsed(currentFrom, currentTo) {
 function fillSlider(minInput, maxInput) {
   const sliderColor = '#C6C6C6';
   const rangeColor = '#ffaa2c';
-  // const thumbColor = '#24262f';
   maxPriceSlider.style.background = `linear-gradient(
     to right,
     ${sliderColor} 0%,

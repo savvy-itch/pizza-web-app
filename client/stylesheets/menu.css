@@ -108,6 +108,24 @@ body {
     filter: brightness(1);
   }
 }
+.no-results {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  width: 22%;
+  max-width: 100%;
+  margin: 1.5rem 1.2rem;
+  flex-direction: column;
+  border-radius: 10px;
+  position: relative;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.75);
+}
+.no-results h3 {
+  font-size: 1.5rem;
+}
+
 .single-pizza {
   display: flex;
   align-items: center;
@@ -120,6 +138,7 @@ body {
   position: relative;
   justify-content: space-between;
   background-color: white;
+  box-shadow: 5px 5px 15px 2px rgba(0, 0, 0, 0.75);
 }
 
 .size-btn-container {
@@ -436,6 +455,7 @@ input[type=range] {
     max-width: 1200px;
   }
   .single-pizza,
+  .no-results,
   .skeleton {
     margin: 1.5rem 1rem;
   }
@@ -445,6 +465,7 @@ input[type=range] {
     max-width: 1000px;
   }
   .single-pizza,
+  .no-results,
   .skeleton {
     width: 30%;
     margin: 1.5rem 1rem;
@@ -455,6 +476,7 @@ input[type=range] {
     max-width: 880px;
   }
   .single-pizza,
+  .no-results,
   .skeleton {
     margin: 1.5rem 0.8rem;
   }
@@ -464,6 +486,7 @@ input[type=range] {
     max-width: 550px;
   }
   .single-pizza,
+  .no-results,
   .skeleton {
     width: 45%;
   }
@@ -473,6 +496,7 @@ input[type=range] {
     justify-content: center;
   }
   .single-pizza,
+  .no-results,
   .skeleton {
     width: 90%;
     margin: 2rem 0;

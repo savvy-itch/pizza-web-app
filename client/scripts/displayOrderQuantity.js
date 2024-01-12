@@ -8,7 +8,7 @@ export function displayOrderQuantity() {
     const ordersArray = JSON.parse(storedOrders);
     if(ordersArray.length) {
       amount = ordersArray.reduce((acc, obj) => acc + obj.amount, 0);
-      quantityDiv.forEach(el => el.textContent = amount);
+      quantityDiv.forEach(el => el.textContent = amount > 9 ? '9+' : amount);
     } else {
       quantityDiv.forEach(el => el.textContent = '');
     }

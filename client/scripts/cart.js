@@ -1,5 +1,7 @@
 import {displayOrderQuantity} from './displayOrderQuantity.js';
 
+// display pizza size
+
 const cartDiv = document.querySelector('.cart');
 const confirmDiv = document.querySelector('.confirm-div');
 const totalCost = document.getElementById('total-cost');
@@ -74,7 +76,7 @@ function updateAmount(e, operation) {
   const orderTitle = orderDiv.querySelector('.order-title').textContent;
   const orderCost = orderDiv.querySelector('.order-cost span').textContent;
   const orderAmount = orderDiv.querySelector('.amount-div p');
-  let obj = storedOrders.find(obj => obj.title === orderTitle && obj.price === orderCost);
+  let obj = storedOrders.find(obj => (obj.title === orderTitle && Number(obj.price) === Number(orderCost)));
   if (operation === 'increase') {
     obj.amount = obj.amount + 1;
   } else if (operation === 'decrease') {
@@ -114,9 +116,8 @@ function checkEmptyCart() {
 function removeItem(e) {
   const orderToRemoveInfo = e.target.parentElement;
   const orderToRemoveTitle = orderToRemoveInfo.querySelector('.order-title').textContent;
-  const orderToRemovePrice = orderToRemoveInfo.querySelector('.order-cost span').textContent;
-  storedOrders = storedOrders.filter(item => item.title !== orderToRemoveTitle
-    || item.price !== orderToRemovePrice);
+  const orderToRemovePrice = Number(orderToRemoveInfo.querySelector('.order-cost span').textContent);
+  storedOrders = storedOrders.filter(item => !(item.title === orderToRemoveTitle && item.price === orderToRemovePrice));
   localStorage.setItem('pizzas', JSON.stringify(storedOrders));
   cartDiv.innerHTML = '';
   displayOrder();
