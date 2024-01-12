@@ -1,54 +1,33 @@
-import {displayOrderQuantity} from './displayOrderQuantity.js';
-import {pizzasUrl, ingredientsUrl} from './globals.js';
-
-// + display custom message when no results were found
-// split code into separate files
-// error page
-// + collapse sidebar when user clicks outside of it
-// hide sender email and secure token from the code
-// styling
+import { pizzasUrl } from './globals.js';
+import { fetchIngredients } from './sidebar.js';
+import { displaySkeletons, displayOrderQuantity } from './utils.js';
 
 const menuGrid = document.getElementById('menu-grid');
 const sortInput = document.getElementById('sort');
 const paginationWrapper = document.getElementById('pagination-wrapper');
 const filtersForm = document.getElementById('filters-form');
-const ingredientFiltersFieldset = document.getElementById('ingredient-filters');
 const sidebar = document.querySelector(".sidebar");
 
-const numOfSkeletons = 4;
 let ordersArray = [];
-let ingredientsList = [];
 let appliedFilters = '';
 
-// add skeletons before data is fetched
-function displaySkeletons() {
-  for (let i = 0; i < numOfSkeletons; i++) {
-    const skeleton = document.createElement('div');
-    skeleton.className = 'skeleton';
-    let content = `
-      <div class="skeleton-img"></div>
-      <div class="skeleton-info">
-        <div class="skeleton-heading"></div>
-        <div class="skeleton-info-heading"></div>
-      </div>`
-    skeleton.innerHTML = content;
-    menuGrid.appendChild(skeleton);
-  };
-}
+fetchData(pizzasUrl);
 
-displaySkeletons();
-fetch(pizzasUrl)
-  .then(response => response.json())
-  .then(MENU => {
-    displayMenuItems(MENU.pizzas);
-    listPageBtns(MENU); 
-    displayOrderQuantity();
-  })
-  .catch(error => console.error(error));
+function fetchData(url) {
+  displaySkeletons(menuGrid);
+  return fetch(url)
+    .then(response => response.json())
+    .then(MENU => {
+      displayMenuItems(MENU.pizzas);
+      listPageBtns(MENU); 
+      displayOrderQuantity();
+    })
+    .catch(error => console.error(error));
+}
 
 document.addEventListener('DOMContentLoaded', fetchIngredients);
 
-export function displayMenuItems(MENU) {
+function displayMenuItems(MENU) {
   menuGrid.innerHTML = '';
   const createPizzaCard = document.createElement('div');
   createPizzaCard.className = 'single-pizza';
@@ -194,8 +173,9 @@ function addPizzaToCart(e, MENU) {
   localStorage.setItem('pizzas', JSON.stringify(ordersArray));
 }
 
+// ======== SORTING =========
 sortInput.addEventListener('change', () => {
-  displaySkeletons();
+  displaySkeletons(menuGrid);
   fetch(`${pizzasUrl}?${appliedFilters}&sort=${sortInput.value}`)
   .then(response => response.json())
   .then(menu => {
@@ -204,17 +184,7 @@ sortInput.addEventListener('change', () => {
   .catch(error => console.error(error));
 });
 
-function fetchData(url) {
-  displaySkeletons();
-  return fetch(url)
-  .then(response => response.json())
-  .then(MENU => {
-    displayMenuItems(MENU.pizzas);
-    listPageBtns(MENU); 
-    displayOrderQuantity();
-  })
-  .catch(error => console.error(error));
-}
+// ======= PAGINATION ==========
 
 function listPageBtns(res) {
   paginationWrapper.innerHTML = '';
@@ -243,32 +213,12 @@ function listPageBtns(res) {
   paginationWrapper.appendChild(nextPage);
 }
 
-// Filters
-function fetchIngredients() {
-  return fetch(ingredientsUrl)
-  .then(response => response.json())
-  .then(data => ingredientsList = data.ingredients)
-  .then(() => displayIngredients())
-  .catch(error => console.error(error));
-}
-
-function displayIngredients() {
-  ingredientsList.map(item => {
-    const ingredientInput = document.createElement('div')
-    ingredientInput.innerHTML = `
-      <label>
-        <input type="checkbox" id=${item.name} name="ingredients" value=${item.name}>
-        ${item.name}
-      </label>
-    `
-    ingredientFiltersFieldset.appendChild(ingredientInput);
-  })
-}
+// =========== FILTERS ==============
 
 filtersForm.addEventListener('submit', (e) =>handleFormSubmission(e));
 
 function handleFormSubmission(e) {
-  displaySkeletons();
+  displaySkeletons(menuGrid);
   e.preventDefault();
   const formData = new FormData(filtersForm);
   let numericFilters = 'numericFilters=';
@@ -296,6 +246,6 @@ function handleFormSubmission(e) {
       listPageBtns(MENU); 
     })
     .catch(error => console.error(error));
-  
+  // timeout for a less rapid collapsing
   setTimeout(() => sidebar.classList.remove('show-sidebar'), 150);
 }

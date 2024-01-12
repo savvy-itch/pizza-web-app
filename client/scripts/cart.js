@@ -1,12 +1,16 @@
-import {displayOrderQuantity} from './displayOrderQuantity.js';
-
-// display pizza size
+import { displayOrderQuantity } from './utils.js';
 
 const cartDiv = document.querySelector('.cart');
 const confirmDiv = document.querySelector('.confirm-div');
 const totalCost = document.getElementById('total-cost');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
+
+const sizeNamings = {
+  s: 'small',
+  m: 'medium',
+  l: 'large'
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   displayOrder();
@@ -20,7 +24,7 @@ function displayOrder() {
     displayEmptyCartMsg();
   } else {
     storedOrders.map(item => {
-      const { title, imgUrl, price, amount } = item;
+      const { title, imgUrl, price, size, amount } = item;
       const orderDiv = document.createElement('div');
       orderDiv.className = 'order-container';
       const orderDetails = `
@@ -30,6 +34,7 @@ function displayOrder() {
         </div>
         <div class="order-info">
           <p class="order-title">${title}</p>
+          <p>(Size: ${sizeNamings[size]})</p>
           <p class="order-cost">£<span>${price}</span></p>
           <button class="remove-btn">Remove</button>
         </div>

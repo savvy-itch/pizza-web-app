@@ -1,3 +1,22 @@
+import { numOfSkeletons } from "./globals.js";
+
+// add skeletons before data is fetched
+export function displaySkeletons(menuGrid) {
+  for (let i = 0; i < numOfSkeletons; i++) {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'skeleton';
+    let content = `
+      <div class="skeleton-img"></div>
+      <div class="skeleton-info">
+        <div class="skeleton-heading"></div>
+        <div class="skeleton-info-heading"></div>
+      </div>`
+    skeleton.innerHTML = content;
+    menuGrid.appendChild(skeleton);
+  };
+}
+
+// order quantity next to cart icon in navbar
 export function displayOrderQuantity() {
   const storedOrders = localStorage.getItem('pizzas');
   const quantityDiv = document.querySelectorAll('.order-quantity');

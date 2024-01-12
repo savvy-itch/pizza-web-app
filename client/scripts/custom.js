@@ -1,8 +1,5 @@
-import {displayOrderQuantity} from './displayOrderQuantity.js';
-import {ingredientsUrl} from './globals.js';
-
-// + load all ingredients
-// + set up z-indexes manually
+import { displayOrderQuantity } from './utils.js';
+import { ingredientsUrl } from './globals.js';
 
 const sizeBtnDiv = document.querySelector('.size-btn-container');
 const toppingBtnDiv = document.querySelector('.topping-btn-container');

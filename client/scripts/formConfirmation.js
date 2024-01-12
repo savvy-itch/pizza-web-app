@@ -1,4 +1,4 @@
-import {displayOrderQuantity} from './displayOrderQuantity.js';
+import {displayOrderQuantity} from './utils.js';
 
 const confirmBtn = document.getElementById('confirm-btn');
 const nameInput = document.getElementById('name-input');
