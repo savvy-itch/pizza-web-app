@@ -8,16 +8,19 @@ let ingredientsList = [];
 
 toggleBtn.addEventListener('click', function() {
   sidebar.classList.toggle('show-sidebar');
+  toggleBtn.classList.toggle('sidebar-toggle-on');
 });
 
 closeBtn.addEventListener('click', function() {
   sidebar.classList.remove('show-sidebar');
+  toggleBtn.classList.remove('sidebar-toggle-on');
 })
 
 document.addEventListener('click', (e) => {
   // collapse sidebar when clicked outside of it
   if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
     sidebar.classList.remove('show-sidebar');
+    toggleBtn.classList.remove('sidebar-toggle-on');
   }
 });
 

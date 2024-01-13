@@ -4,11 +4,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-// + pagination
-// + sorting functionality;
-// + filter functionality;
-// error page
-
 const pizzasRouter = require('./routes/pizzas');
 const ingredientRouter = require('./routes/ingredients');
 
@@ -18,6 +13,7 @@ const connectDB = require('./db/connect');
 
 const port = process.env.PORT || 3000;
 
+app.use(express.static('public'));
 app.use(express.json());
 
 // CHECK IF CORS SHOULD BE REMOVED BEFORE DEPLOYMENT

@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Order Form</title>
+  <title>Create Pizza</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-  <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.ico">
-  <link rel="stylesheet" href="../stylesheets/styles.css">
-  <link rel="stylesheet" href="../stylesheets/form.css">
-  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <link rel="stylesheet" href="./stylesheets/styles.css">
+  <link rel="stylesheet" href="./stylesheets/custom.css">
+  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
 <body>
   <header>
@@ -31,7 +30,7 @@
         <!-- links -->
         <ul class="links">
           <li>
-            <a href="../index.html">
+            <a href="./index.html">
               <i class="fa-solid fa-house"></i>
               home
             </a>
@@ -58,25 +57,36 @@
   </header>
 
   <main>
-    <section class="container">
-      <div class="confirm-div">
-        <h2>Provide your contact information</h2>
-        <form method="post">
-          <label for="name">Name: </label>
-          <input id="name-input" type="text" name="name" placeholder="Василь">
-          <label for="phone">Phone Number: </label>
-          <input id="phone-input" type="tel" name="phone" placeholder="+380123456789">
-          <label for="email">Email: </label>
-          <input id="email-input" type="email" name="email" placeholder="example@mail.com">
-          <button id="confirm-btn" class="btn" type="submit">Confirm Information</button>
-        </form>
+    <section class="create-section">
+      <div class="container">
+        <h1>Create Your Own Pizza</h1>
+        <p id="create-pizza-desc" class="create-pizza-desc">Create your own pizza by choosing its size and toppings! Select from three sizes and over 6 individual types of toppings.</p>
+        <section class="pizza-constructor-container">
+          <div class="pizza-constructor-image">
+            <img class="pizza-base-image" src="https://i.ibb.co/8Bk52SY/pizza-base.png" alt="pizza base">
+          </div>
+          <div class="pizza-settings-container">
+            <h3>Choose size: </h3>
+            <div class="size-btn-container">
+              <!-- generated in JS -->
+            </div>
+            <h3>Choose toppings:</h3>
+            <div class="topping-btn-container">
+              <!-- generated in JS -->
+            </div>
+          </div>
+        </section>
+        <div class="cart-btn-container">
+          <button id="add-btn" class="add-to-cart-btn btn">
+            Add to Cart
+            <span class="total-price"></span>
+          </button>
+        </div>
       </div>
     </section>
   </main>
-
-  <script src="../scripts/nav.js"></script>
-  <script type="module" src="../scripts/main.js"></script>
-  <script type="module" src="../scripts/formConfirmation.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./scripts/nav.js"></script>
+  <script src="./scripts/custom.js" type="module"></script>
+  <script src="./scripts/main.js" type="module"></script>
 </body>
 </html>
