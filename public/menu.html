@@ -74,27 +74,31 @@
               <input id="max-slider" type="range" value="100" min="0" max="100"/>
             </div>
             <div class="form_control">
-              <div class="form_control_container">
+              <div class="price-number-input-container">
                 <label for="min-input">Min</label>
-                <input class="form_control_container__time__input" name="min-price" type="number" id="min-input" value="0" min="0" max="100"/>
+                <input class="price-number-input" name="min-price" type="number" id="min-input" value="0" min="0" max="100" required/>
+                <p>£</p>
               </div>
               <p>-</p>
-              <div class="form_control_container">
+              <div class="price-number-input-container">
                 <label for="max-input">Max</label>
-                <input class="form_control_container__time__input" name="max-price" type="number" id="max-input" value="100" min="0" max="100"/>
+                <input class="price-number-input" name="max-price" type="number" id="max-input" value="100" min="0" max="100" required/>
+                <p>£</p>
               </div>
             </div>
           </div>
         </fieldset>
         <fieldset>
           <legend>Discount</legend>
-          <input type="checkbox" id="discount" name="discount" value=">0">
-          <label for="discount">On Discount</label>
+          <label for="discount" class="checkbox-label">On Discount
+            <input type="checkbox" id="discount" name="discount" value=">0">
+            <span class="checkmark"></span>
+          </label>
         </fieldset>
         <fieldset id="ingredient-filters">
           <legend>Ingredients</legend>
         </fieldset>
-        <input type="submit" value="Update Results">
+        <input class="submit-filters-btn btn" type="submit" value="Update Results">
       </form>
     </aside>
     <div class="container">

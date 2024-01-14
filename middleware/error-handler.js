@@ -1,4 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
+const path = require('path');
 
 const errorHandlerMiddleware = async (err, req, res, next) => {
   let customError = {
@@ -9,7 +10,10 @@ const errorHandlerMiddleware = async (err, req, res, next) => {
     customError.msg = `Duplicate value entered for ${Object.keys(err.keyValue)} field, please choose different value`;
     customError.statusCode = 400;
   }
-  return res.status(customError.statusCode).json({ msg: customError.msg });
+  if (customError.statusCode === StatusCodes.INTERNAL_SERVER_ERROR) {
+    return res.status(customError.statusCode).sendFile(path.join(__dirname, '..', 'public', '500.html'));
+  }
+  return res.status(customError.statusCode).json({ msg: customError.msg, code: customError.code });
 }
 
 module.exports = errorHandlerMiddleware;

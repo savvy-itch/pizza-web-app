@@ -36,9 +36,9 @@ function displayIngredientsList() {
   ingredientsList.map(item => {
     const ingredientInput = document.createElement('div')
     ingredientInput.innerHTML = `
-      <label>
+      <label class="checkbox-label">${item.name}
         <input type="checkbox" id=${item.name} name="ingredients" value=${item.name}>
-        ${item.name}
+        <span class="checkmark"></span>
       </label>
     `
     ingredientFiltersFieldset.appendChild(ingredientInput);

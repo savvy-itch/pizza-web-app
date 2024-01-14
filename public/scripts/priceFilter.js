@@ -5,10 +5,12 @@ const maxPriceSlider = document.getElementById('max-slider');
 const minPriceInput = document.getElementById('min-input');
 const maxPriceInput = document.getElementById('max-input');
 
-minPriceSlider.addEventListener('input', controlMaxPriceSlider);
-maxPriceSlider.addEventListener('input', controlMinPriceSlider);
+minPriceSlider.addEventListener('input', controlMinPriceSlider);
+maxPriceSlider.addEventListener('input', controlMaxPriceSlider);
 minPriceInput.addEventListener('input', controlMinPriceInput);
 maxPriceInput.addEventListener('input', controlMaxPriceInput);
+
+const minRange = 10;
 
 function controlMinPriceInput() {
   const [min, max] = getParsed(minPriceInput, maxPriceInput);
@@ -25,7 +27,7 @@ function controlMaxPriceInput() {
   const [min, max] = getParsed(minPriceInput, maxPriceInput);
   fillSlider(minPriceInput, maxPriceInput);
   setToggleAccessible(maxPriceInput);
-  if (min <= max) {
+  if (min < max) {
     maxPriceSlider.value = max;
     maxPriceInput.value = max;
   } else {
@@ -36,11 +38,11 @@ function controlMaxPriceInput() {
 function controlMaxPriceSlider() {
   const [min, max] = getParsed(minPriceSlider, maxPriceSlider);
   fillSlider(minPriceSlider, maxPriceSlider);
-  if (min > max) {
-    minPriceSlider.value = max;
-    minPriceInput.value = max;
+  if (max < min + minRange) {
+    maxPriceSlider.value = min + minRange;
+    maxPriceInput.value = min + minRange;
   } else {
-    minPriceInput.value = min;
+    maxPriceInput.value = maxPriceSlider.value;
   }
 }
 
@@ -48,12 +50,11 @@ function controlMinPriceSlider() {
   const [min, max] = getParsed(minPriceSlider, maxPriceSlider);
   fillSlider(minPriceSlider, maxPriceSlider);
   setToggleAccessible(maxPriceSlider);
-  if (min <= max) {
-    maxPriceSlider.value = max;
-    maxPriceInput.value = max;
+  if (min > max - minRange) {
+    minPriceSlider.value = max - minRange;
+    minPriceInput.value = max - minRange;
   } else {
-    maxPriceInput.value = min;
-    maxPriceSlider.value = min;
+    minPriceInput.value = minPriceSlider.value;
   }
 }
 

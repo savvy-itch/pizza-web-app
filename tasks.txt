@@ -1,3 +1,8 @@
 - hide sender email and secure token from the code
 - for the first page of the menu fetch 1 more item than the limit (because of create pizza card)
-- styling
+- SEO & optimization
+- testing:
+ filters:
+  - negative numbers
+  - isNaN
+  - outside the min-nax range

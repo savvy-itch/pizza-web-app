@@ -238,6 +238,7 @@ function handleFormSubmission(e) {
   }
   appliedFilters = `${numericFilters}${ingredientFilters && `&ingredients=${ingredientFilters.join(',')}`}`;
   const urlWithFilters = `${pizzasUrl}?${appliedFilters}&sort=${sortInput.value}`;
+  console.log(urlWithFilters)
   
   fetch(urlWithFilters)
     .then(response => response.json())
