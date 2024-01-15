@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const pizzasRouter = require('./routes/pizzas');
 const ingredientRouter = require('./routes/ingredients');
+const emailRouter = require('./routes/sendEmail');
 
 const errorMiddleware = require('./middleware/error-handler');
 const notFoundMiddleware = require('./middleware/not-found');
@@ -18,12 +19,10 @@ app.use(express.json());
 
 // CHECK IF CORS SHOULD BE REMOVED BEFORE DEPLOYMENT
 app.use(cors());
-app.get('/', (req, res) => {
-  res.send('Pizza Shop API');
-});
 
 app.use('/api/pizzas', pizzasRouter);
 app.use('/api/ingredients', ingredientRouter);
+app.use('/form', emailRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

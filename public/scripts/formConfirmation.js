@@ -100,39 +100,22 @@ function getTotalCost() {
 }
 
 function sendEmail() {
-  Email.send({
-    SecureToken : "",
-    To : `${emailInput.value}`,
-    From : "",
-    Subject : "Order Confirmation",
-    Body : `
-      <html>
-        <h1>Thank you for shopping in our store!</h1>
-        <h3>Here are your contact details: </h3>
-        <ul>
-          <li><strong>Name: </strong>${nameInput.value}</li>
-          <li><strong>Phone number: </strong>${phoneInput.value}</li>
-          <li><strong>Email: </strong>${emailInput.value}</li>
-        </ul>
-        <h3>Here are your order details</h3>
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Amount</th>
-            </tr> 
-          </thead>
-          ${emailContent}
-          </tbody>
-          <hr>
-          <p><strong>Total: £${emailTotal}</strong></p>
-        </table>
-        <h4>Expect a phone call from our operators to inquire about delivery.</h4>
-        <h2 style="text-align: center; margin: 1rem 0; font-style: italic;">Happy Pizza Time!:)</h2>
-      </html>`
-})
+  const reqBody = {
+    to: nameInput.value,
+    phoneNumber: phoneInput.value,
+    toEmail: emailInput.value,
+    emailContent,
+    emailTotal
+  }
+
+  return fetch ('/form', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(reqBody)
+  })
+  .then(response => response.json())
   .then(Swal.fire({
     position: 'center',
     icon: 'success',
@@ -140,5 +123,6 @@ function sendEmail() {
     text: 'Check your inbox for our letter',
     showConfirmButton: true,
     })
-  );
+  )
+  .catch(err => console.log(err));
 }

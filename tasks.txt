@@ -1,8 +1,9 @@
 - hide sender email and secure token from the code
+- replace local image links to imgbb links
 - for the first page of the menu fetch 1 more item than the limit (because of create pizza card)
 - SEO & optimization
 - testing:
- filters:
-  - negative numbers
-  - isNaN
-  - outside the min-nax range
+  filters:
+    - negative numbers
+    - isNaN
+    - outside the min-nax range
