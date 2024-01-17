@@ -6,7 +6,6 @@ const phoneInput = document.getElementById('phone-input');
 const emailInput = document.getElementById('email-input');
 const orders = localStorage.getItem('pizzas');
 let storedOrders = JSON.parse(orders);
-let emailContent = '<tbody>';
 let emailTotal = 0;
 
 confirmBtn.addEventListener('click', (e) => {
@@ -14,9 +13,18 @@ confirmBtn.addEventListener('click', (e) => {
   checkNameValidity();
   checkNumberValidity();
   checkEmailValidity();
-  if (checkNameValidity() && checkNumberValidity() && checkEmailValidity()) {
+  console.log(storedOrders);
+  if (!storedOrders || storedOrders.length === 0) {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Error',
+      text: 'You don\'t have any orders to submit. Please choose products from our menu',
+      showConfirmButton: false,
+      timer: 2500
+    });
+  } else if (checkNameValidity() && checkNumberValidity() && checkEmailValidity()) {
     getTotalCost();
-    formEmail();
     sendEmail();
     localStorage.removeItem('pizzas');
     storedOrders = [];
@@ -28,7 +36,7 @@ confirmBtn.addEventListener('click', (e) => {
       title: 'Error',
       text: 'Please enter correct values',
       showConfirmButton: false,
-      timer: 2000
+      timer: 2500
     });
   }
 })
@@ -36,7 +44,8 @@ confirmBtn.addEventListener('click', (e) => {
 function checkNameValidity() {
   if (nameInput.value) {
     nameInput.style.border = '2px solid black';
-    let result = !/[^A-Za-zА-Яа-яіІїЇєЄ ]/.test(nameInput.value);
+    // names without numbers and special symbols aside from "."
+    const result = !/[^a-zа-яіїє \.]/i.test(nameInput.value);
     result 
       ? nameInput.style.border = '2px solid black' 
       : nameInput.style.border = '2px solid red'; 
@@ -78,19 +87,6 @@ function checkEmailValidity() {
   }
 }
 
-function formEmail() {
-  storedOrders.map(pizza => {
-    let pizzaElem = document.createElement('tr');
-    pizzaElem.innerHTML = `
-      <td style="text-align:center;padding:3px"><img style="max-width:50px" src=${pizza.imgUrl} alt="pizza-img"></td>
-      <td style="text-align:center;padding:3px">${pizza.title}</td>
-      <td style="text-align:center;padding:3px">£${pizza.price}</td>
-      <td style="text-align:center;padding:3px">${pizza.amount}</td>`;
-    pizzaElem = new XMLSerializer().serializeToString(pizzaElem);
-    emailContent += pizzaElem;
-  });
-}
-
 function getTotalCost() {
   storedOrders.forEach(pizza => {
     let pizzaPrice = pizza.price * pizza.amount;
@@ -104,7 +100,7 @@ function sendEmail() {
     to: nameInput.value,
     phoneNumber: phoneInput.value,
     toEmail: emailInput.value,
-    emailContent,
+    order: storedOrders,
     emailTotal
   }
 

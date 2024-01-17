@@ -1,7 +1,6 @@
 const navToggle = document.querySelector('.nav-toggle');
 const links = document.querySelector('.links');
 const liLinks = links.querySelectorAll('li');
-const showLinks = document.querySelector('.show-links');
 
 window.addEventListener('resize', handleLinksDisplay);
 
@@ -10,7 +9,7 @@ navToggle.addEventListener('click', function() {
   handleLinksDisplay();
 });
 
-function handleLinksDisplay() {
+export function handleLinksDisplay() {
   
   if (window.innerWidth <= 800) {
     navToggle.style.transform = 'rotate(90deg)';
