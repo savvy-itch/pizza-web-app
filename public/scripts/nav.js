@@ -9,8 +9,7 @@ navToggle.addEventListener('click', function() {
   handleLinksDisplay();
 });
 
-export function handleLinksDisplay() {
-  
+function handleLinksDisplay() {
   if (window.innerWidth <= 800) {
     navToggle.style.transform = 'rotate(90deg)';
     if (links.classList.contains('show-links')) {
