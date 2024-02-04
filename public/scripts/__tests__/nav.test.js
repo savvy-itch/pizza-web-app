@@ -11,7 +11,7 @@ let container;
 let links;
 
 describe('index.html', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     dom = new JSDOM(html, { runScripts: 'dangerously' });
     const scriptEl = dom.window.document.createElement('script');
     scriptEl.textContent = script;

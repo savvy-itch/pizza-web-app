@@ -13,13 +13,13 @@ let appliedFilters = '';
 
 fetchData(pizzasUrl);
 
-function fetchData(url) {
+export function fetchData(url) {
   displaySkeletons(menuGrid);
   return fetch(url)
     .then(response => response.json())
     .then(MENU => {
-      displayMenuItems(MENU.pizzas);
-      listPageBtns(MENU); 
+      displayMenuItems(MENU.pizzas, menuGrid);
+      listPageBtns(MENU, paginationWrapper); 
       displayOrderQuantity();
     })
     .catch(error => console.error(error));
@@ -27,60 +27,22 @@ function fetchData(url) {
 
 document.addEventListener('DOMContentLoaded', fetchIngredients);
 
-function displayMenuItems(MENU) {
-  menuGrid.innerHTML = '';
-  const createPizzaCard = document.createElement('div');
-  createPizzaCard.className = 'single-pizza';
-  let content = `
-    <img class="create-pizza-img" src="../images/create-pizza.webp" alt="create-pizza">
-      <div class="create-pizza-info">
-        <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
-        <p class="create-info-desc">Choose From Our Options Of Design 
-          And Make Your Own Pizza.</p>
-      </div>
-      <a class="create-btn-link" href="./custom.html">
-        <button class="create-btn btn">Create Now</button>
-      </a>`;
-  createPizzaCard.innerHTML = content;
-  menuGrid.appendChild(createPizzaCard);
+function displayMenuItems(MENU, containerElement) {
+  containerElement.innerHTML = '';
+  containerElement.appendChild(createCustomPizzaCard());
 
   // no results
   if (MENU.length === 0) {
-    const noResultsCard = document.createElement('div');
-    noResultsCard.className = 'no-results';
-    let pizzaContent = `<h3>Sorry, no results :(</h3>`;
-    noResultsCard.innerHTML = pizzaContent;
-    menuGrid.appendChild(noResultsCard);
+    containerElement.appendChild(createNoResultsCard());
   } else {
     MENU.map(item => {
-      const singlePizza = document.createElement('div');
-      singlePizza.className = 'single-pizza';
-      let pizzaContent = `
-        <div class="size-btn-container">
-          <button class="size-btn">S</button>
-          <button class="size-btn active">M</button>
-          <button class="size-btn">L</button>
-        </div>
-        <img src=${item.imgUrl} loading="lazy" alt="pizza">
-        <div class="single-pizza-info">
-          <p class="pizza-price">
-          ${item.discount !== 0
-            ? `<span class="discount-old-price">£${item.price.m}</span>
-              £${setDiscountPrice(item.price.m, item.discount)}</p>`
-            : `£${item.price.m}`
-          }
-          </p>
-          <h3 class="pizza-info-heading">${item.title}</h3>
-          <p class="pizza-info-desc">${item.ingredients.map(i => ` ${i.name}`)}</p>
-        </div>
-        <button class="add-btn btn">Add</button>`;
-      singlePizza.innerHTML = pizzaContent;
-      menuGrid.appendChild(singlePizza);
+      const singlePizza = createPizzaCard(item);
+      containerElement.appendChild(singlePizza);
       if (item.discount !== 0) {
         setDiscountTag(singlePizza, item.discount);
       }
   
-      menuGrid.addEventListener('click', e => {
+      containerElement.addEventListener('click', e => {
         const sizeBtn = e.target.closest('.size-btn');
         if (sizeBtn) {
           changeSize(sizeBtn, MENU);
@@ -93,11 +55,63 @@ function displayMenuItems(MENU) {
       });
       const addBtn = singlePizza.querySelector('.add-btn');
       addBtn.addEventListener('click', (e) => {
-        addPizzaToCart(e, MENU);
+        addPizzaToCart(e.target.parentElement, MENU);
         displayOrderQuantity();
       });
     });
   }
+}
+
+function createCustomPizzaCard() {
+  const customPizzaCard = document.createElement('div');
+  customPizzaCard.className = 'single-pizza';
+  let content = `
+    <img class="create-pizza-img" src="../images/create-pizza.webp" alt="create-pizza">
+      <div class="create-pizza-info">
+        <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
+        <p class="create-info-desc">Choose from our topping options 
+          and make your own pizza.
+        </p>
+      </div>
+      <a class="create-btn-link" href="./custom.html">
+        <button class="create-btn btn">Create Now</button>
+      </a>`;
+  customPizzaCard.innerHTML = content;
+  return customPizzaCard;
+}
+
+function createNoResultsCard() {
+  const noResultsCard = document.createElement('div');
+  noResultsCard.className = 'no-results';
+  let pizzaContent = `<h3>Sorry, no results :(</h3>`;
+  noResultsCard.innerHTML = pizzaContent;
+  return noResultsCard;
+}
+
+function createPizzaCard(item) {
+  const singlePizza = document.createElement('div');
+  singlePizza.className = 'single-pizza';
+  let pizzaContent = `
+    <div class="size-btn-container">
+      <button class="size-btn">S</button>
+      <button class="size-btn active">M</button>
+      <button class="size-btn">L</button>
+    </div>
+    <img src=${item.imgUrl} loading="lazy" alt="pizza">
+    <div class="single-pizza-info">
+      <p class="pizza-price">
+      ${item.discount !== 0
+        ? `<span class="discount-old-price">£${item.price.m}</span>
+          £${setDiscountPrice(item.price.m, item.discount)}</p>`
+        : `£${item.price.m}`
+      }
+      </p>
+      <h3 class="pizza-info-heading">${item.title}</h3>
+      <p class="pizza-info-desc">${item.ingredients.map(i => ` ${i.name}`)}</p>
+    </div>
+    <button class="add-btn btn">Add</button>`;
+  singlePizza.innerHTML = pizzaContent;
+  return singlePizza;
 }
 
 // change price on size button click
@@ -112,7 +126,7 @@ function changeSize(sizeBtn, MENU) {
   // display new price
   // if the pizza has a discount
   if (pizzaFromDb.discount !== 0) {
-    // check if discount wasn't already displayed (for M size by default)
+    // check if discount wasn't already displayed (M size by default)
     if (!priceElement.querySelector('.discount-old-price')) {
       newPrice = setDiscountPrice(newPrice, pizzaFromDb.discount);
     }
@@ -126,7 +140,7 @@ function changeSize(sizeBtn, MENU) {
 }
 
 // add discount tag on pizza
-function setDiscountTag(item, percent) {
+export function setDiscountTag(item, percent) {
   item.querySelector('.size-btn-container')
     .insertAdjacentHTML('afterend', `<div class="discount-tag">-${percent}%</div>`);
 }
@@ -138,8 +152,7 @@ function setDiscountPrice(price, percent) {
 }
 
 // add order to local storage
-function addPizzaToCart(e, MENU) {
-  const currentPizza = e.target.parentElement;
+function addPizzaToCart(currentPizza, MENU) {
   const currentSize = currentPizza.querySelector('.active').textContent.toLowerCase();
   const pizzaTitle = currentPizza.querySelector('.pizza-info-heading').textContent;
   const pizzaFromDb = MENU.find(elem => elem.title === pizzaTitle);
@@ -174,20 +187,21 @@ function addPizzaToCart(e, MENU) {
 }
 
 // ======== SORTING =========
+
 sortInput.addEventListener('change', () => {
   displaySkeletons(menuGrid);
   fetch(`${pizzasUrl}?${appliedFilters}&sort=${sortInput.value}`)
-  .then(response => response.json())
-  .then(menu => {
-    displayMenuItems(menu.pizzas); 
-  })
-  .catch(error => console.error(error));
+    .then(response => response.json())
+    .then(menu => {
+      displayMenuItems(menu.pizzas, menuGrid); 
+    })
+    .catch(error => console.error(error));
 });
 
 // ======= PAGINATION ==========
 
-function listPageBtns(res) {
-  paginationWrapper.innerHTML = '';
+function listPageBtns(res, wrapperElement) {
+  wrapperElement.innerHTML = '';
   // add prev page button 
   const prevPage = document.createElement('button');
   prevPage.disabled = res.page === 1;
@@ -195,12 +209,12 @@ function listPageBtns(res) {
     fetchData(`${pizzasUrl}?${appliedFilters}&page=${res.page - 1}`);
   });
   prevPage.innerHTML = `<i class="fa-solid fa-chevron-left"></i>`;
-  paginationWrapper.appendChild(prevPage);
+  wrapperElement.appendChild(prevPage);
 
   // add current page number
   const currPagePara = document.createElement('p');
   currPagePara.textContent = res.page;
-  paginationWrapper.appendChild(currPagePara);
+  wrapperElement.appendChild(currPagePara);
 
   // add next page button
   const hasMore = (res.totalAmount - res.skip - res.amount) > 0;
@@ -210,7 +224,7 @@ function listPageBtns(res) {
     fetchData(`${pizzasUrl}?${appliedFilters}&page=${res.page + 1}`);
   });
   nextPage.innerHTML = `<i class="fa-solid fa-chevron-right"></i>`;
-  paginationWrapper.appendChild(nextPage);
+  wrapperElement.appendChild(nextPage);
 }
 
 // =========== FILTERS ==============
@@ -238,13 +252,12 @@ function handleFormSubmission(e) {
   }
   appliedFilters = `${numericFilters}${ingredientFilters && `&ingredients=${ingredientFilters.join(',')}`}`;
   const urlWithFilters = `${pizzasUrl}?${appliedFilters}&sort=${sortInput.value}`;
-  console.log(urlWithFilters)
   
   fetch(urlWithFilters)
     .then(response => response.json())
     .then(MENU => {
-      displayMenuItems(MENU.pizzas);
-      listPageBtns(MENU); 
+      displayMenuItems(MENU.pizzas, menuGrid);
+      listPageBtns(MENU, paginationWrapper); 
     })
     .catch(error => console.error(error));
   // timeout for a less rapid collapsing

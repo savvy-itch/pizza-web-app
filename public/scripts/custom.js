@@ -5,8 +5,8 @@ const sizeBtnDiv = document.querySelector('.size-btn-container');
 const toppingBtnDiv = document.querySelector('.topping-btn-container');
 const pizzaConstructorDiv = document.querySelector('.pizza-constructor-image');
 const addBtn = document.getElementById('add-btn');
-const totalPrice = document.querySelector('.total-price');
 const descriptionPara = document.getElementById('create-pizza-desc');
+const totalPrice = document.querySelector('.total-price');
 const sizesList = [
   {size:"s", price: 7.25},
   {size:"m", price: 9.25},
@@ -23,65 +23,77 @@ const toppingsZIndex = [
 ]
 let fetchedIngredients = [];
 let ordersArray = [];
+let total = 0;
 
-fetch(ingredientsUrl)
-  .then(response => response.json())
-  .then(ingredients => {
-    fetchedIngredients = ingredients.ingredients;
-    displaySizes();
-    displayIngredients(ingredients.ingredients);
-    updateTotalCost(ingredients.ingredients);
-    displayOrderQuantity();
-    populateDescription();
-});
+document.addEventListener('DOMContentLoaded', initialFetch);
 
-addBtn.addEventListener('click', () => {
-  addPizzaToCart();
-  displayOrderQuantity();
-});
-
-function displaySizes() {
-  sizesList.map(size => {
-    const sizeBtn = document.createElement('button');
-    sizeBtn.className = 'size-btn';
-    sizeBtn.innerHTML = `<span class="pizza-size">${size.size}</span><span>£${size.price}</span>`;
-    // set default size of medium
-    if (size.size === 'm') {
-      sizeBtn.classList.add('active');
-    }
-    sizeBtnDiv.appendChild(sizeBtn);
+function initialFetch() {
+  fetch(ingredientsUrl)
+    .then(response => response.json())
+    .then(ingredients => {
+      fetchedIngredients = ingredients.ingredients;
+      displaySizes(sizesList, sizeBtnDiv);
+      displayIngredients(ingredients.ingredients, toppingBtnDiv);
+      updateTotalCost(sizesList, ingredients.ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+      displayOrderQuantity();
+      populateDescription();
   });
+}
 
+function displaySizes(sizesList, sizeBtnDiv) {
+  sizesList.map(size => {
+    createSizeBtn(size, sizeBtnDiv);
+  });
+  
   const sizeBtns = [...document.querySelectorAll('.size-btn')];
   sizeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       sizeBtns.forEach(btn => {
         btn.classList.remove('active');
-      })
+      });
       btn.classList.add('active');
-      updateTotalCost(fetchedIngredients);
+      updateTotalCost(sizesList, fetchedIngredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
     });
   });
 }
 
-function displayIngredients(ingredients) {
+document.addEventListener('DOMContentLoaded', () => {
+  addBtn.addEventListener('click', () => {
+    addPizzaToCart(sizeBtnDiv, total);
+    displayOrderQuantity();
+  });
+})
+
+function createSizeBtn(sizeObj, sizeBtnDiv) {
+  const sizeBtn = sizeBtnDiv.ownerDocument.createElement('button');
+  sizeBtn.className = 'size-btn';
+  sizeBtn.setAttribute('aria-label', 'size-btn');
+  sizeBtn.setAttribute('data-size', sizeObj.size);
+  sizeBtn.innerHTML = `<span class="pizza-size">${sizeObj.size}</span><span>£${sizeObj.price}</span>`;
+  // set default size of medium
+  if (sizeObj.size === 'm') {
+    sizeBtn.classList.add('active');
+  }
+  sizeBtnDiv.appendChild(sizeBtn);
+}
+
+function displayIngredients(ingredients, toppingBtnDiv, toppingsZIndex) {
   ingredients.map(ingredient => {
-    const ingredientBtn = document.createElement('button');
+    const ingredientBtn = toppingBtnDiv.ownerDocument.createElement('button');
     ingredientBtn.className = 'topping-btn';
     ingredientBtn.textContent = ingredient.name;
     toppingBtnDiv.appendChild(ingredientBtn);
     ingredientBtn.addEventListener('click', (e) => {
       ingredientBtn.classList.toggle('active');
-      toggleTopping(e.target, ingredients);
-      updateTotalCost(ingredients);
+      const toppingFromDb = ingredients.find(el => el.name === e.target.textContent);
+      toggleTopping(e.target, toppingFromDb, toppingsZIndex);
+      updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
     })
   });
 }
 
-// add topping image to the pizza
-function toggleTopping(currentTopping, ingredients) {
-  const toppingFromDb = ingredients.find(el => el.name === currentTopping.textContent);
-
+// update topping image for the pizza
+function toggleTopping(currentTopping, toppingFromDb, toppingsZIndex) {
   // add topping image
   if (currentTopping.classList.contains('active')) {
     const toppingImg = document.createElement('img');
@@ -103,8 +115,7 @@ function toggleTopping(currentTopping, ingredients) {
   }
 }
 
-let total = 0;
-function updateTotalCost(ingredients) {
+function updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice) {
   // add pizza size price
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size');
   const sizeFromDb = sizesList.find(el => el.size === selectedSize.textContent);
@@ -129,7 +140,7 @@ function updateTotalCost(ingredients) {
 }
 
 // add pizza info into local storage
-function addPizzaToCart() {
+function addPizzaToCart(sizeBtnDiv, total) {
   const orders = localStorage.getItem('pizzas') ?? '[]';
   const storedOrders = JSON.parse(orders);
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size').textContent;
@@ -169,3 +180,13 @@ function addPizzaToCart() {
 function populateDescription() {
   descriptionPara.textContent = `Create your own pizza by choosing its size and toppings! Select from three sizes and over ${fetchedIngredients.length} individual types of toppings.`
 }
+
+export { 
+  sizesList, 
+  displaySizes, 
+  createSizeBtn,
+  displayIngredients,
+  toggleTopping,
+  updateTotalCost,
+  toppingsZIndex
+};
