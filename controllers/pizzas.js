@@ -53,7 +53,7 @@ const getAllPizzas = async (req, res) => {
   res.status(200).json({ pizzas, page, amount: pizzas.length, totalAmount, skip });
 }
 
-// AVAILABLE FOR ADMINS ONLY!
+// FOR ADMINS ONLY!
 const createPizza = async (req, res) => {
   const pizza = await Pizza.create(req.body);
   res.status(StatusCodes.CREATED).json({ pizza });

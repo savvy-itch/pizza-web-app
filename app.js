@@ -3,6 +3,7 @@ require('express-async-errors');
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const pizzasRouter = require('./routes/pizzas');
 const ingredientRouter = require('./routes/ingredients');
@@ -29,7 +30,11 @@ app.use(errorMiddleware);
 
 const start = async () => {
   try {
-    await connectDB(process.env.MONGO_URI);
+    if (!mongoose.connection.readyState) {
+      // Only connect to the database if not already connected
+      await connectDB(process.env.MONGO_URI);
+    }
+
     app.listen(port, () => console.log(`Server is listening on port ${port}...`));
   } catch (error) {
     console.log(error);

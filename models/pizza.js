@@ -5,7 +5,7 @@ const pizzaSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide pizza title'],
     maxlength: [30, 'Title cannot be more than 30 characters'],
-    unique: [true, `Pizza with title ${this.title} already exists`]
+    unique: [true, 'Pizza with title {VALUE} already exists']
   },
   price: {
     s: Number,
