@@ -66,7 +66,7 @@ function createCustomPizzaCard() {
   const customPizzaCard = document.createElement('div');
   customPizzaCard.className = 'single-pizza';
   let content = `
-    <img class="create-pizza-img" height="361" width="350" src="../images/create-pizza.webp" alt="create-pizza">
+    <img class="create-pizza-img" height="309" width="300" src="../images/create-pizza.webp" alt="create-pizza">
       <div class="create-pizza-info">
         <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
         <p class="create-info-desc">Choose from our topping options 
@@ -97,7 +97,7 @@ function createPizzaCard(item) {
       <button class="size-btn active">M</button>
       <button class="size-btn">L</button>
     </div>
-    <img height="274" width="300" src=${item.imgUrl} loading="lazy" alt="pizza">
+    <img height="220" width="241" src=${item.imgUrl} loading="lazy" alt="pizza">
     <div class="single-pizza-info">
       <p class="pizza-price">
       ${item.discount !== 0

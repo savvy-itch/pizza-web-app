@@ -39,9 +39,9 @@ function displayOrder() {
           <button class="remove-btn">Remove</button>
         </div>
         <div class="amount-div">
-          <button class="increase-btn"><i class="fa-solid fa-chevron-up"></i></button>
+          <button class="increase-btn" title="Increase"><i class="fa-solid fa-chevron-up"></i></button>
           <p>${amount}</p>
-          <button class="decrease-btn"><i class="fa-solid fa-chevron-down"></i></button>
+          <button class="decrease-btn" title="Decrease"><i class="fa-solid fa-chevron-down"></i></button>
         </div>
         </div>
         <div class="line"></div>`;

@@ -1,6 +1,6 @@
 body {
   max-height: 100vh;
-  background-image: url("https://i.ibb.co/p3c8bKR/pizza-background2.png");
+  background-image: url("https://i.ibb.co/d6tcZK3/pizza-background2.webp");
   overflow: hidden;
 }
 
@@ -72,9 +72,11 @@ body {
   margin-bottom: 1rem;
 }
 
-.footer-container h5 {
+.dev-info p {
   text-align: center;
   margin: 1rem 0;
+  font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .references {

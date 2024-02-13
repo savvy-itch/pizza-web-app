@@ -36,24 +36,33 @@ h1 {
 .pizza-constructor-image .pizza-base-image {
   width: 100%;
   height: auto;
+  max-width: 600px;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .pizza-settings-container {
   @include mixins.col__center;
   display: flex;
   align-items: flex-start;
   max-width: 45%;
-}
-.pizza-settings-container h3 {
-  align-self: flex-start;
+
+  p {
+    font-size: 1.1rem;
+    font-weight: bold;
+    align-self: flex-start;
+  }
 }
 .pizza-topping-image {
   z-index: 1;
   position: absolute;
-  left: 7.5%;
-  top: 2%;
+  left: 50%;
+  top: 50%;
   width: 85%;
+  max-width: 500px;
   height: auto;
+  transform: translate(-50%, -50%);
 }
 .topping-btn-container,
 .size-btn-container {

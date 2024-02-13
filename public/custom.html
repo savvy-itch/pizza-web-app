@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pizza shop provides a wide array of different kinds of pizza; create your own custom pizza from out ingredients.">
   <title>Create Pizza</title>
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+  <link rel="preload" as="image" href="https://i.ibb.co/0Kb97C8/pizza-base-600x549.webp">
   <link rel="stylesheet" href="./stylesheets/styles.css">
   <link rel="stylesheet" href="./stylesheets/custom.css">
-  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
 </head>
 <body>
   <header>
@@ -16,7 +19,7 @@
       <div class="nav-center">
         <div class="nav-header">
           <div class="nav-logo">
-            <img class="logo" src="https://i.ibb.co/5n7tb1h/logo.png" alt="pizza-logo">
+            <img class="logo" src="https://i.ibb.co/hM29bnn/logo.png" alt="pizza-logo">
             Pizza O'Clock
           </div>
           <a class="cart-link-sm" href="./cart.html">
@@ -63,14 +66,24 @@
         <p id="create-pizza-desc" class="create-pizza-desc">Create your own pizza by choosing its size and toppings! Select from three sizes and over 6 individual types of toppings.</p>
         <section class="pizza-constructor-container">
           <div class="pizza-constructor-image">
-            <img class="pizza-base-image" src="https://i.ibb.co/8Bk52SY/pizza-base.png" alt="pizza base">
+            <img 
+              class="pizza-base-image" 
+              src="https://i.ibb.co/0Kb97C8/pizza-base-600x549.webp"
+              srcset="
+                https://i.ibb.co/0Kb97C8/pizza-base-600x549.webp 600w,
+                https://i.ibb.co/LdZHq50/pizza-base-480x439.webp 480w,
+                https://i.ibb.co/f1h12kp/pizza-base-384x351.webp 384w
+              " 
+              sizes="(max-width: 800px) 50vw, 30vw"
+              alt="pizza base"
+            >
           </div>
           <div class="pizza-settings-container">
-            <h3>Choose size: </h3>
+            <p>Choose size: </p>
             <div class="size-btn-container">
               <!-- generated in JS -->
             </div>
-            <h3>Choose toppings:</h3>
+            <p>Choose toppings:</p>
             <div class="topping-btn-container">
               <!-- generated in JS -->
             </div>

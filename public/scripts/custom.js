@@ -20,7 +20,7 @@ const toppingsZIndex = [
   { id: '6598f6b425f82811512c6fff', zIndex: 4},
   { id: '6598f6b425f82811512c6ffc', zIndex: 5},
   { id: '6598f6b425f82811512c6ffb', zIndex: 3},
-]
+];
 let fetchedIngredients = [];
 let ordersArray = [];
 let total = 0;
@@ -33,7 +33,7 @@ function initialFetch() {
     .then(ingredients => {
       fetchedIngredients = ingredients.ingredients;
       displaySizes(sizesList, sizeBtnDiv);
-      displayIngredients(ingredients.ingredients, toppingBtnDiv);
+      displayIngredients(ingredients.ingredients, toppingBtnDiv, toppingsZIndex);
       updateTotalCost(sizesList, ingredients.ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
       displayOrderQuantity();
       populateDescription();

@@ -1,4 +1,5 @@
 - replace local image links to imgbb links
-- SEO & optimization:
-  - increase logo img size from 32px to 40px;
-  - decrease menu items images height to ~220px;
++ SEO & optimization:
+  + increase logo img size from 32px to 40px;
+  + decrease menu items images height to ~220px;
+- responsiveness
