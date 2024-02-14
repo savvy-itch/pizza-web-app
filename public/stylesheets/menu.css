@@ -381,6 +381,7 @@ body {
   z-index: 100;
   color: var(--background-color);
   border-right: 2px solid hsl(231, 14%, 64%);
+  overflow: scroll;
 }
 .sidebar fieldset {
   border: none;
@@ -634,6 +635,16 @@ input[type=range] {
   .skeleton {
     width: 90%;
     margin: 2rem 0;
+  }
+}
+@media screen and (max-width: 368px) {
+  .go-to-cart-btn {
+    width: 80vw;
+  }
+  .sort-wrapper {
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0;
   }
 }
 

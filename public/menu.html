@@ -7,10 +7,14 @@
   <meta name="description" content="Pizza shop provides a wide array of different kind of pizza; create your own custom pizza from out ingredients.">
   <title>Menu</title>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
   <link rel="stylesheet" href="./stylesheets/styles.css">
   <link rel="stylesheet" href="./stylesheets/menu.css">
   <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
+  <link rel="preload" as="image" type="image/webp" href="../images/create-pizza.webp">
 </head>
 <body>
   <header>
@@ -21,11 +25,11 @@
             <img class="logo" src="https://i.ibb.co/hM29bnn/logo.png" alt="pizza-logo">
             Pizza O'Clock
           </div>
-          <a class="cart-link-sm" href="./cart.html">
+          <a class="cart-link-sm" href="./cart.html" title="cart">
             <i class="fa-solid fa-basket-shopping"></i>
             <div class="order-quantity"></div>
           </a>
-          <button class="nav-toggle">
+          <button class="nav-toggle" aria-label="toggle">
             <i class="fas fa-bars"></i>
           </button>
         </div>
@@ -116,6 +120,18 @@
         </div>
       </div>
       <div id="menu-grid" class="menu-grid">
+        <div class="single-pizza">
+          <img class="create-pizza-img" height="309" width="300" src="../images/create-pizza.webp" alt="create-pizza">
+            <div class="create-pizza-info">
+              <h3 class="pizza-info-heading">Create Your Own Pizza</h3>
+              <p class="create-info-desc">Choose from our topping options 
+                and make your own pizza.
+              </p>
+            </div>
+            <a class="create-btn-link" href="./custom.html">
+              <button class="create-btn btn">Create Now</button>
+            </a>
+        </div>
       </div>
       <div id="pagination-wrapper" class="pagination-wrapper">
       </div>

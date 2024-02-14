@@ -80,7 +80,7 @@ nav a,
   position: absolute;
   top: -13px;
   right: -10px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-color);
   justify-content: center;
@@ -163,7 +163,7 @@ nav a,
   }
   .nav-header {
     display: grid;
-    grid-template-columns: 6fr 1fr 1fr;
+    grid-template-columns: 6fr 1.3fr 1fr;
     padding: .5rem;
   }
   .nav-logo {

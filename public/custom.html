@@ -8,8 +8,17 @@
   <title>Create Pizza</title>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" media="print" onload="this.onload=null;this.removeAttribute('media');">
   <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico">
-  <link rel="preload" as="image" href="https://i.ibb.co/0Kb97C8/pizza-base-600x549.webp">
+  <link rel="preload" as="image" imagesrcset="
+    images/pizza-base(600x549).webp 600w,
+    images/pizza-base(480x439).webp 480w,
+    images/pizza-base(384x351).webp 384w
+  "
+    imagesizes="(max-width: 800px) 50vw, 30vw"
+  >
   <link rel="stylesheet" href="./stylesheets/styles.css">
   <link rel="stylesheet" href="./stylesheets/custom.css">
 </head>
@@ -22,11 +31,11 @@
             <img class="logo" src="https://i.ibb.co/hM29bnn/logo.png" alt="pizza-logo">
             Pizza O'Clock
           </div>
-          <a class="cart-link-sm" href="./cart.html">
+          <a class="cart-link-sm" href="./cart.html" title="cart">
             <i class="fa-solid fa-basket-shopping"></i>
             <div class="order-quantity"></div>
           </a>
-          <button class="nav-toggle">
+          <button class="nav-toggle" aria-label="toggle">
             <i class="fas fa-bars"></i>
           </button>
         </div>
@@ -68,11 +77,11 @@
           <div class="pizza-constructor-image">
             <img 
               class="pizza-base-image" 
-              src="https://i.ibb.co/0Kb97C8/pizza-base-600x549.webp"
+              src="images/pizza-base(600x549).webp"
               srcset="
-                https://i.ibb.co/0Kb97C8/pizza-base-600x549.webp 600w,
-                https://i.ibb.co/LdZHq50/pizza-base-480x439.webp 480w,
-                https://i.ibb.co/f1h12kp/pizza-base-384x351.webp 384w
+                images/pizza-base(600x549).webp 600w,
+                images/pizza-base(480x439).webp 480w,
+                images/pizza-base(384x351).webp 384w
               " 
               sizes="(max-width: 800px) 50vw, 30vw"
               alt="pizza base"
