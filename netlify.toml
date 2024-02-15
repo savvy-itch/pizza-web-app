@@ -1,7 +1,8 @@
-[functions]
-  external_node_modules = ["express"]
+[build]
+  functions = "netlify/functions"
+  publish = "public"
 [[redirects]]
   force = true
   from = "/*"
   status = 200
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/index/:splat"
