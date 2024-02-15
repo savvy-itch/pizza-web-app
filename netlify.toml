@@ -1,8 +1,21 @@
 [build]
   functions = "netlify/functions"
+  command = "npm run build"
   publish = "public"
+
 [[redirects]]
-  force = true
   from = "/*"
+  to = "/index.html"
   status = 200
-  to = "/.netlify/functions/index/:splat"
+
+[[redirects]]
+  from = "/api/*"
+  to = ":splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/form/*"
+  to = "/form/:splat"
+  status = 200
+  force = true
