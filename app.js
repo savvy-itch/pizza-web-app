@@ -2,7 +2,7 @@ require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
 const app = express();
-// const cors = require('cors');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const pizzasRouter = require('./routes/pizzas');
@@ -31,7 +31,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // CHECK IF CORS SHOULD BE REMOVED BEFORE DEPLOYMENT
-// app.use(cors());
+app.use(cors());
 
 app.use('/api/pizzas', pizzasRouter);
 app.use('/api/ingredients', ingredientRouter);
