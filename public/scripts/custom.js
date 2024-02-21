@@ -34,7 +34,7 @@ function initialFetch() {
       fetchedIngredients = ingredients.ingredients;
       displaySizes(sizesList, sizeBtnDiv);
       displayIngredients(ingredients.ingredients, toppingBtnDiv, toppingsZIndex);
-      updateTotalCost(sizesList, ingredients.ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+      updateTotalCost(sizesList, ingredients.ingredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice);
       displayOrderQuantity();
       populateDescription();
   });
@@ -52,14 +52,14 @@ function displaySizes(sizesList, sizeBtnDiv) {
         btn.classList.remove('active');
       });
       btn.classList.add('active');
-      updateTotalCost(sizesList, fetchedIngredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+      updateTotalCost(sizesList, fetchedIngredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice);
     });
   });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   addBtn.addEventListener('click', () => {
-    addPizzaToCart(sizeBtnDiv, total);
+    addPizzaToCart(sizeBtnDiv);
     displayOrderQuantity();
   });
 })
@@ -87,7 +87,7 @@ function displayIngredients(ingredients, toppingBtnDiv, toppingsZIndex) {
       ingredientBtn.classList.toggle('active');
       const toppingFromDb = ingredients.find(el => el.name === e.target.textContent);
       toggleTopping(e.target, toppingFromDb, toppingsZIndex);
-      updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+      updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice);
     })
   });
 }
@@ -115,7 +115,7 @@ function toggleTopping(currentTopping, toppingFromDb, toppingsZIndex) {
   }
 }
 
-function updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice) {
+function updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice) {
   // add pizza size price
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size');
   const sizeFromDb = sizesList.find(el => el.size === selectedSize.textContent);
@@ -124,6 +124,7 @@ function updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, tota
   // add toppings price
   const selectedToppings = [...toppingBtnDiv.querySelectorAll('.active')];
   // if no toppings were selected, disable add button
+  console.log(addBtn);
   if (selectedToppings.length < 1) {
     addBtn.setAttribute("disabled", "disabled");
   } else {
@@ -136,11 +137,12 @@ function updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, tota
     total += toppingsTotal;
   }
   total = total.toFixed(2);
+  // console.log(total);
   totalPrice.textContent = `£${total}`;
 }
 
 // add pizza info into local storage
-function addPizzaToCart(sizeBtnDiv, total) {
+function addPizzaToCart(sizeBtnDiv) {
   const orders = localStorage.getItem('pizzas') ?? '[]';
   const storedOrders = JSON.parse(orders);
   const selectedSize = sizeBtnDiv.querySelector('.active .pizza-size').textContent;
@@ -150,6 +152,7 @@ function addPizzaToCart(sizeBtnDiv, total) {
     amount: 1,
     size: selectedSize,
   };
+  console.log(total);
   customPizza.price = Number(total);
 
   let isMatchFound = false;

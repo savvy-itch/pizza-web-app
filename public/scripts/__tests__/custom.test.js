@@ -47,7 +47,7 @@ describe('testing individual functions', () => {
     const toppingBtnDiv = document.querySelector('.topping-btn-container');
     let total = 0;
     const addBtn = document.getElementById('add-btn');
-    updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+    updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice);
     const defaultSize = sizesList.find(size => size.size === 'm');
     expect(totalPrice.textContent).toBe(`£${defaultSize.price}`);
   });
@@ -77,7 +77,7 @@ describe('displaySizes()', () => {
           btn.classList.remove('active');
         });
         btn.classList.add('active');
-        updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+        updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice);
       });
     });
 
@@ -105,7 +105,7 @@ describe('displaySizes()', () => {
       toppingBtnDiv.appendChild(ingredientBtn);
       ingredientBtn.addEventListener('click', (e) => {
         ingredientBtn.classList.toggle('active');
-        updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, total, addBtn, totalPrice);
+        updateTotalCost(sizesList, ingredients, sizeBtnDiv, toppingBtnDiv, addBtn, totalPrice);
       })
     });
 
@@ -123,4 +123,3 @@ describe('displaySizes()', () => {
     expect(totalPrice.textContent).toBe(`£${smallSize.price}`); // 7.25
   })
 })
-// 126

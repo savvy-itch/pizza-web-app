@@ -18,6 +18,7 @@ export function displaySkeletons(menuGrid) {
 
 // order quantity next to cart icon in navbar
 export function displayOrderQuantity() {
+  console.log('displayOrderQuantity')
   const storedOrders = localStorage.getItem('pizzas');
   // there's 2 quantity divs - one for desktop, one for mobile
   const quantityDiv = document.querySelectorAll('.order-quantity');
